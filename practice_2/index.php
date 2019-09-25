@@ -11,7 +11,8 @@
     <a href="teachersPart/set_session.php">Set session</a><br/>
     <a href="teachersPart/check_session.php">Check session</a><br/>
     <a href="teachersPart/destroy_session.php">Destroy session</a><br/>
-    <a href="task/login.php">Login page</a>
+    <a href="task/login.php">Login page</a><br/>
+    <a href="task/cabinet.php">Cabinet page</a>
 </div>
 </body>
 </html>

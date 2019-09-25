@@ -2,12 +2,10 @@
 $loginPage = 'login.php';
 
 session_start();
-if ($_SESSION['auth'] == 1 || $_SESSION['auth'] != 'true') {
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] != true) {
     header('Location: ' . $loginPage);
-}
-?>
-
-<!doctype html>
+} else {
+    echo '<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +18,13 @@ if ($_SESSION['auth'] == 1 || $_SESSION['auth'] != 'true') {
 <body>
 <div class="container">
     <h3>Logged in!</h3>
+    <form action="logout.php" method="post">
+        <button type="submit">Logout</button>
+    </form>
 </div>
 </body>
-</html>'
+</html>';
+}
+
+?>
 

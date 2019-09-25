@@ -2,8 +2,12 @@
 $loginPage = 'login.php';
 
 session_start();
-if (isset($_SESSION['auth']) && $_SESSION['auth'] == true) {
-    echo '<!doctype html>
+if ($_SESSION['auth'] == 1 || $_SESSION['auth'] != 'true') {
+    header('Location: ' . $loginPage);
+}
+?>
+
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,11 +18,9 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-    <div class="container">
-        <h3>Logged in!</h3>
-    </div>
+<div class="container">
+    <h3>Logged in!</h3>
+</div>
 </body>
-</html>';
-} else {
-    header('Location: '.$loginPage);
-}
+</html>'
+

@@ -14,7 +14,8 @@ session_start();
 </head>
 <body>
 <div class="container">
-    <h2>Hello world!</h2>
+    <h2>Hello world!</h2><br>
+    <a href="templates/registrationPage.php">Registration!</a>
 </div>
 </body>
 </html>

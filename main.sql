@@ -10,7 +10,7 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   photo VARCHAR(255),
-  role_id INT NOT NULL,
+  role_id INT DEFAULT 1,
   FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 

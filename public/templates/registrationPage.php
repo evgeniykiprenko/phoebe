@@ -17,22 +17,22 @@ session_start();
 <body>
 
 <div class="container bg-light">
-    <form action="/registrationController.php">
+    <form action="../../controllers/registrationController.php" method="post">
         <div class="form-group">
             <label for="firstName">First name:</label>
-            <input type="text" class="form-control" id="firstName">
+            <input type="text" class="form-control" id="firstName" name="firstName">
         </div>
         <div class="form-group">
             <label for="lastName">Last name:</label>
-            <input type="text" class="form-control" id="lastName">
+            <input type="text" class="form-control" id="lastName" name="lastName">
         </div>
         <div class="form-group">
             <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="email" name="email">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
+            <input type="password" class="form-control" id="pwd" name="password">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

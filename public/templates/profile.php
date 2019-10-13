@@ -20,7 +20,7 @@ if (!isset($_SESSION['email'])) {
 </head>
 <body>
 <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="index.php">
+    <a class="navbar-brand" href="../index.php">
         <img src="../assets/img/logo.png" width="135" height="50" alt="Phoebe">
     </a>
     <div class="text-right">
@@ -37,7 +37,14 @@ if (!isset($_SESSION['email'])) {
     </div>
 </nav>
 <div class="container">
+<!--    user's image-->
+    <div>
 
+    </div>
+<!--    user's info-->
+    <div>
+
+    </div>
 </div>
 </body>
 </html>

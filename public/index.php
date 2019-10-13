@@ -45,7 +45,7 @@ session_start();
                 </span>
                 <span>
                     <button type="button" class="btn btn-info nav-button">
-                        <a href="templates/cabinet.php" class="text-white">Profile</a>
+                        <a href="templates/profile.php" class="text-white">Profile</a>
                     </button>
                 </span>
                 <span>

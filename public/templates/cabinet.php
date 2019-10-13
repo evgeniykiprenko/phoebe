@@ -21,7 +21,7 @@ if (!isset($_SESSION['email'])) {
 <body>
 <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="index.php">
-        <img src="assets/img/logo.png" width="135" height="50" alt="Phoebe">
+        <img src="../assets/img/logo.png" width="135" height="50" alt="Phoebe">
     </a>
     <div class="text-right">
         <span>

@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
         $addUserSql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "', '" . $password . "');";
         $conn->query($addUserSql);
+        mysqli_close($conn);
 
         $_SESSION['auth'] = true;
         $_SESSION['firstName'] = $firstName;

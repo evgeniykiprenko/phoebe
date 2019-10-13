@@ -11,30 +11,51 @@ session_start();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>Main page</title>
+    <title>Phoebe</title>
 </head>
 <body>
 <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="index.php">
-        <img src="assets/img/logo.png" width="135" height="50" alt="Phoebe">
+        <img src="../assets/img/logo.png" width="135" height="50" alt="Phoebe">
     </a>
-    <div class="text-right">
-        <span>
-            <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#myModal">
-                Sign in
-            </button>
-        </span>
-        <span>
-            <button type="button" class="btn  btn-info">
-                <a href="templates/registrationPage.php" class="text-white">Sign up</a>
-            </button>
-        </span>
-    </div>
+
+    <?php
+    if (empty($_SESSION['email'])) {
+        echo '<div class="text-right">
+                <span>
+                    <button type="button" class="btn btn-success nav-button" data-toggle="modal" data-target="#myModal">
+                        Sign in
+                    </button>
+                </span>
+                <span>
+                    <button type="button" class="btn btn-info nav-button">
+                        <a href="templates/registrationPage.php" class="text-white">Sign up</a>
+                    </button>
+                </span>
+            </div>';
+    } else {
+        echo '<div class="text-right">
+                <span>
+                    <h4 id="greeter">Hello, ' . $_SESSION['firstName'] . '!</h4>
+                </span>
+                <span>
+                    <button type="button" class="btn btn-info nav-button">
+                        <a href="templates/cabinet.php" class="text-white">Profile</a>
+                    </button>
+                </span>
+                <span>
+                    <button type="button" class="btn btn-danger logout-button">
+                        <a href="../controllers/logoutController.php" class="text-white">Logout</a>   
+                    </button>
+                </span>
+            </div>';
+    }
+    ?>
 </nav>
 
 <div class="container">
@@ -52,14 +73,14 @@ session_start();
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="../controllers/authController.php">
+                    <form action="../controllers/authController.php" method="post">
                         <div class="form-group">
                             <label for="email">Email address:</label>
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
-                            <input type="password" class="form-control" id="pwd">
+                            <input type="password" class="form-control" id="pwd" name="password">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -94,7 +115,7 @@ session_start();
                    </tr>';
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . $row["id"] . "</td>
+                        <td><a href='#'>" . $row["id"] . "</a></td>
                         <td>" . $row["first_name"] . "</td>
                         <td>" . $row["last_name"] . "</td>
                         <td>" . $row["email"] . "</td>

@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+$mainPage = "../index.php";
+if(isset($_SESSION['email'])) {
+    header("Location: " . $mainPage);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

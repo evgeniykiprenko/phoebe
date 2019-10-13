@@ -1,0 +1,12 @@
+.nav-button {
+    width: 150px;
+}
+
+.logout-button {
+    width: 100px;
+}
+
+#greeter {
+    display: inline;
+    padding-right: 20px;
+}

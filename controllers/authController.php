@@ -11,17 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
     if (isValid($email) && isValid($password)) {
-        $sql = "SELECT * FROM users WHERE email = '" . trim($email) . "';";
+        $sql = "SELECT * FROM users WHERE email = '" . $email . "';";
         $result = runQuery($sql);
-        if ($result->num_rows > 0 && $result['password'] == $password) {
-            $_SESSION['auth'] = true;
-            $_SESSION['firstName'] = $result['first_name'];
-            $_SESSION['lastName'] = $result['last_name'];
-            $_SESSION['email'] = $email['email'];
-            if ($result['role_id'] == '1') {
-                $_SESSION['email'] = 'admin';
+        if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+            $_SESSION['firstName'] = $row['first_name'];
+            $_SESSION['lastName'] = $row['last_name'];
+            $_SESSION['email'] = $row['email'];
+            if ($row['role_id'] == '1') {
+                $_SESSION['role'] = 'admin';
             } else {
-                $_SESSION['email'] = 'user';
+                $_SESSION['role'] = 'user';
             }
         }
     } else {

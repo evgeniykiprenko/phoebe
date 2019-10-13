@@ -1,25 +1,15 @@
 <?php
-session_start();
+include 'validationUtils.php';
+include 'dbUtils.php';
 
-/**
- * Function for validation user parameters
- * @param $data
- * @return string
- */
-function isValid($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return empty($data);
-}
+session_start();
 
 $mainPage = "../public/index.php";
 
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     header("Location:" . $mainPage);
 } else {
-//getting user data
+    //getting user data
     $email = $_POST['email'];
     $password = $_POST['password'];
     $firstName = $_POST['firstName'];
@@ -27,29 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
     $registrationPage = "../public/templates/registrationPage.php";
 
-    if (isValid($email) || isValid($password) || isValid($firstName) || isValid($lastName)) {
-        header("Location:" . $registrationPage);
-    } else {
-
-        $servername = "localhost";
-        $dbUser = "root";
-        $dbPassword = "root";
-        $database = "phoebe";
-
-        $conn = new mysqli($servername, $dbUser, $dbPassword, $database);
-        if ($conn->connect_error) {
-            //this is a temporary solution, just to prevent showing details of our DB
-            die('Oops, something went wrong! Try again, please.');
-        }
-
+    if (isValid($email) && isValid($password) && isValid($firstName) && isValid($lastName)) {
         $addUserSql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "', '" . $password . "');";
-        $conn->query($addUserSql);
-        mysqli_close($conn);
-
+        runQuery($addUserSql);
         $_SESSION['auth'] = true;
         $_SESSION['firstName'] = $firstName;
         $_SESSION['lastName'] = $lastName;
         $_SESSION['email'] = $email;
+        $_SESSION['role'] = 'user';
         header("Location:" . $mainPage);
+    } else {
+        header("Location:" . $registrationPage);
     }
 }

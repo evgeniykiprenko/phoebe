@@ -16,8 +16,13 @@ session_start();
 </head>
 <body>
 
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="../index.php">
+        <img src="../assets/img/logo.png" width="135" height="50" alt="Phoebe">
+    </a>
+</nav>
+
 <div class="container">
-    <a href="../index.php">Back to main page</a>
     <div>
         <form action="../../controllers/registrationController.php" method="post">
             <div class="form-group">
@@ -38,6 +43,11 @@ session_start();
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+    </div>
+    <div class="text-right">
+        <span>
+            <a href="../index.php">Back to main page</a>
+        </span>
     </div>
 </div>
 </body>

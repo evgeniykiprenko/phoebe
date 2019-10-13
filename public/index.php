@@ -13,15 +13,61 @@ session_start();
 
     <link rel="stylesheet" href="css/index.css">
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>Main page</title>
 </head>
 <body>
+<nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="index.php">
+        <img src="assets/img/logo.png" width="135" height="50" alt="Phoebe">
+    </a>
+    <div class="text-right">
+        <span>
+            <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#myModal">
+                Sign in
+            </button>
+        </span>
+        <span>
+            <button type="button" class="btn  btn-info">
+                <a href="templates/registrationPage.php" class="text-white">Sign up</a>
+            </button>
+        </span>
+    </div>
+</nav>
+
 <div class="container">
-    <h1>Phoebe</h1><br>
-    <a href="templates/registrationPage.php">Registration!</a>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign in</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="../controllers/authController.php">
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input type="password" class="form-control" id="pwd">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="table-responsive">
         <?php
         $servername = "localhost";

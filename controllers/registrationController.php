@@ -44,5 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
         $addUserSql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "', '" . $password . "');";
         $conn->query($addUserSql);
+
+        $_SESSION['auth'] = true;
+        $_SESSION['firstName'] = $firstName;
+        $_SESSION['lastName'] = $lastName;
+        $_SESSION['email'] = $email;
+        header("Location:" . $mainPage);
     }
 }

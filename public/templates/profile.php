@@ -1,9 +1,18 @@
 <?php
 session_start();
 include "../../controllers/dbUtils.php";
+include "../../controllers/validationUtils.php";
+
 $id = $_GET['id'];
 $sql = "SELECT first_name, last_name, email, password, photo FROM users WHERE id = $id;";
 $result = runQuery($sql);
+$show = false;
+$row = null;
+$linkToPhoto = null;
+if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+    $show = true;
+    $linkToPhoto = !empty($row['photo']) ? $row['photo'] : "../assets/img/defaultProfilePhoto.jpg";
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -94,16 +103,16 @@ $result = runQuery($sql);
         echo '<div class="row mx-md-n5">
         <div class="col px-md-5">
             <div>
-                <img src="../assets/img/defaultProfilePhoto.jpg" alt="Profile photo" id="usersImage">
+                <img src="' .$linkToPhoto. '" alt="Profile photo" id="usersImage">
             </div>
-            <form action="../../controllers/uploadController.php" method="post" enctype="multipart/form-data">
+            <form action="../../controllers/uploadController.php?id=' . $id . '" method="post" enctype="multipart/form-data">
                 Select image to upload:
                 <input type="file" name="fileToUpload" id="fileToUpload">
                 <input type="submit" value="Upload Image" name="submit">
             </form>
         </div>
         <div class="col px-md-5">';
-        if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+        if ($show) {
             echo '
                 <form action="../../controllers/updateProfileController.php" method="post">
                   <div class="form-group row">
@@ -147,11 +156,11 @@ $result = runQuery($sql);
         echo '<div class="row mx-md-n5">
         <div class="col px-md-5">
             <div>
-                <img src="../assets/img/defaultProfilePhoto.jpg" alt="Profile photo" id="usersImage">
+                <img src="' .$linkToPhoto. '" alt="Profile photo" id="usersImage">
             </div>
         </div>
         <div class="col px-md-5">';
-        if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+        if ($show) {
             echo '
                 <form>
                   <div class="form-group row">

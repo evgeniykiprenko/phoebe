@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['firstName'] = $row['first_name'];
             $_SESSION['lastName'] = $row['last_name'];
             $_SESSION['email'] = $row['email'];
-            if ($row['role_id'] == '1') {
+            if ($row['role_id'] == 1) {
                 $_SESSION['role'] = 'admin';
             } else {
                 $_SESSION['role'] = 'user';

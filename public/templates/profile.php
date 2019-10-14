@@ -1,6 +1,9 @@
 <?php
 session_start();
 include "../../controllers/dbUtils.php";
+$id = $_GET['id'];
+$sql = "SELECT first_name, last_name, email, photo FROM users WHERE id = $id;";
+$result = runQuery($sql);
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,6 +18,9 @@ include "../../controllers/dbUtils.php";
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -22,7 +28,22 @@ include "../../controllers/dbUtils.php";
     <a class="navbar-brand" href="../index.php">
         <img src="../assets/img/logo.png" width="135" height="50" alt="Phoebe">
     </a>
-    <div class="text-right">
+    <?php
+    if (empty($_SESSION['email'])) {
+        echo '<div class="text-right">
+                <span>
+                    <button type="button" class="btn btn-success nav-button" data-toggle="modal" data-target="#myModal">
+                        Sign in
+                    </button>
+                </span>
+                <span>
+                    <button type="button" class="btn btn-info nav-button">
+                        <a href="registrationPage.php" class="text-white">Sign up</a>
+                    </button>
+                </span>
+            </div>';
+    } else {
+        echo '<div class="text-right">
         <span>
             <button type="button" class="btn btn-info nav-button">
                 <a href="../index.php" class="text-white">Main page</a>
@@ -33,47 +54,127 @@ include "../../controllers/dbUtils.php";
                 <a href="../../controllers/logoutController.php" class="text-white">Logout</a>
             </button>
         </span>
-    </div>
+    </div>';
+    }
+    ?>
 </nav>
-<div class="container">
-    <!--    user's image-->
-    <div id="fullUsersInfo">
-        <div class="d-inline-block">
-            <img src="../assets/img/defaultProfilePhoto.jpg" alt="Profile photo" id="usersImage">
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Sign in</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="../../controllers/authController.php" method="post">
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
-        <div id="usersInfo" class="d-inline-block">
-            <?php
-            $id = $_GET['id'];
-            $sql = "SELECT first_name, last_name, email, photo FROM users WHERE id = $id;";
-            $result = runQuery($sql);
-            if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
-                echo '
+    </div>
+</div>
+
+<div class="container">
+    <?php
+    if ($_SESSION['id'] == $id || $_SESSION['role'] == 'admin') {
+        echo '<div class="row mx-md-n5">
+        <div class="col px-md-5">
+            <div>
+                <img src="../assets/img/defaultProfilePhoto.jpg" alt="Profile photo" id="usersImage">
+            </div>
+            <form action="../../controllers/uploadController.php" method="post" enctype="multipart/form-data">
+                Select image to upload:
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="submit" value="Upload Image" name="submit">
+            </form>
+        </div>
+        <div class="col px-md-5">';
+        if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+            echo '
+                <form action="../../controllers/updateProfileController.php" method="post">
+                  <div class="form-group row">
+                    <label for="firstName" class="col col-form-label col-form-label-lg">First name:</label>
+                      <input type="text" class="form-control form-control-lg" id="firstName" value="' . $row['first_name'] . '">
+                  </div>
+                  <div class="form-group row">
+                    <label for="lastName" class="col col-form-label col-form-label-lg">Last name:</label>
+                      <input type="text" class="form-control form-control-lg" id="lastName" value="' . $row['last_name'] . '">
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col col-form-label col-form-label-lg">Email:</label>
+                      <input type="text" class="form-control form-control-lg" id="staticEmail" value="' . $row['email'] . '">
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticPassword" class="col col-form-label col-form-label-lg">Password:</label>
+                      <input type="password" class="form-control form-control-lg" id="staticPassword">
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                        <div class="d-flex justify-content-start">
+                            <button type="submit" class="btn btn-success btn-block">Update</button>  
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-danger btn-block">
+                                <a href="../../controllers/deleteProfileController.php" class="text-white">Delete</a>
+                            </button>   
+                        <div>
+                      </div>
+                   </div>
+                  
+                </form>';
+        } else {
+            echo "<p>Oops, can\'t get the data(</p>";
+        }
+        echo '</div>
+    </div>';
+    } else {
+        echo '<div class="row mx-md-n5">
+        <div class="col px-md-5">
+            <div>
+                <img src="../assets/img/defaultProfilePhoto.jpg" alt="Profile photo" id="usersImage">
+            </div>
+        </div>
+        <div class="col px-md-5">';
+        if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+            echo '
                 <form>
-                  <div class="form-group">
-                    <label for="firstName">First name:</label>
-                    <div class="col-sm-10">
-                      <input type="text" readonly class="form-control" id="firstName" value="' . $row['first_name'] . '">
-                    </div>
+                  <div class="form-group row">
+                    <label for="firstName" class="col col-form-label col-form-label-lg">First name:</label>
+                      <input type="text" readonly class="form-control form-control-lg" id="firstName" value="' . $row['first_name'] . '">
                   </div>
-                  <div class="form-group">
-                    <label for="lastName">Last name:</label>
-                    <div class="col-sm-10">
-                      <input type="text" readonly class="form-control" id="lastName" value="' . $row['last_name'] . '">
-                    </div>
+                  <div class="form-group row">
+                    <label for="lastName" class="col col-form-label col-form-label-lg">Last name:</label>
+                      <input type="text" readonly  class="form-control form-control-lg" id="lastName" value="' . $row['last_name'] . '">
                   </div>
-                  <div class="form-group">
-                    <label for="staticEmail">Email:</label>
-                    <div class="col-sm-10">
-                      <input type="text" readonly class="form-control" id="staticEmail" value="' . $row['email'] . '">
-                    </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col col-form-label col-form-label-lg">Email:</label>
+                      <input type="text" readonly class="form-control form-control-lg" id="staticEmail" value="' . $row['email'] . '">
                   </div>
                 </form>';
-            } else {
-                echo "<p>Oops, can't get the data(</p>";
-            }
-            ?>
-        </div>
-    </div>
+        } else {
+            echo "<p>Oops, can\'t get the data(</p>";
+        }
+        echo '</div>
+    </div>';
+    }
+    ?>
+
 </div>
 </body>
 </html>

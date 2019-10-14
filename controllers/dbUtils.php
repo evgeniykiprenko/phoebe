@@ -5,7 +5,6 @@ function runQuery($sql) {
     $dbUser = "root";
     $dbPassword = "root";
     $database = "phoebe";
-
     $conn = new mysqli($servername, $dbUser, $dbPassword, $database);
     if ($conn->connect_error) {
         //this is a temporary solution, just to prevent showing details of our DB

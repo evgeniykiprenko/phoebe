@@ -1,10 +1,6 @@
 <?php
 session_start();
-
-$mainPage = "../index.php";
-if (!isset($_SESSION['email'])) {
-    header("Location: " . $mainPage);
-}
+include "../../controllers/dbUtils.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,9 +9,12 @@ if (!isset($_SESSION['email'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link rel="stylesheet" href="../assets/css/main.css">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Document</title>
 </head>
 <body>
@@ -37,13 +36,40 @@ if (!isset($_SESSION['email'])) {
     </div>
 </nav>
 <div class="container">
-<!--    user's image-->
-    <div>
-
+    <!--    user's image-->
+    <div id="usersImage" class="d-inline-block">
     </div>
-<!--    user's info-->
-    <div>
-
+    <div class="d-inline-block">
+        <?php
+        $id = $_GET['id'];
+        $sql = "SELECT first_name, last_name, email, photo FROM users WHERE id = $id;";
+        $result = runQuery($sql);
+        if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+            echo '
+                <form>
+                  <div class="form-group">
+                    <label for="firstName" class="col-sm-2 col-form-label">First name:</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="firstName" value="' .$row['first_name']. '">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName" class="col-sm-2 col-form-label">Last name:</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="lastName" value="' .$row['last_name']. '">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' .$row['email']. '">
+                    </div>
+                  </div>
+                </form>';
+        } else {
+            echo "<p>Oops, can't get the data(</p>";
+        }
+        ?>
     </div>
 </div>
 </body>

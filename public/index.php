@@ -41,11 +41,11 @@ session_start();
     } else {
         echo '<div class="text-right">
                 <span>
-                    <h4 id="greeter">Hello, ' . $_SESSION['firstName'] . '!</h4>
+                    <h4 id="greeter" class="my-2">Hello, ' . $_SESSION['firstName'] . '!</h4>
                 </span>
                 <span>
                     <button type="button" class="btn btn-info nav-button">
-                        <a href="templates/profile.php" class="text-white">Profile</a>
+                        <a href="templates/profile.php?id=' . $_SESSION['id'] . '" class="text-white">Profile</a>
                     </button>
                 </span>
                 <span>
@@ -106,22 +106,27 @@ session_start();
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            echo '<table class="table table-hover table-bordered">
+            echo '<div class="py-5">
+                  <table class="table table-hover table-bordered">
+                  <thead>
                    <tr>
                     <td>#</td>
                     <td>First name</td>
                     <td>Last name</td>
                     <td>Email</td>
-                   </tr>';
+                   </tr>
+                   </thead>';
             while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td><a href='#'>" . $row["id"] . "</a></td>
+                echo "<tbody>
+                      <tr>
+                        <td><a href='templates/profile.php?id=" . $row["id"] . "'>" . $row["id"] . "</a></td>
                         <td>" . $row["first_name"] . "</td>
                         <td>" . $row["last_name"] . "</td>
                         <td>" . $row["email"] . "</td>
-                      </tr>";
+                      </tr>
+                      </tbody>";
             }
-            echo '</table>';
+            echo '</table></div>';
         } else {
             echo '<p>Nothing to show :(</p>';
         }

@@ -18,13 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
     $registrationPage = "../public/templates/registrationPage.php";
 
     if (isValid($email) && isValid($password) && isValid($firstName) && isValid($lastName)) {
-        $addUserSql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "', '" . $password . "');";
+        $addUserSql = "INSERT INTO users (first_name, last_name, email, password)
+            VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "', '" . $password . "');";
         runQuery($addUserSql);
-        $_SESSION['firstName'] = $firstName;
-        $_SESSION['lastName'] = $lastName;
-        $_SESSION['email'] = $email;
-        $_SESSION['role'] = 'user';
-        header("Location:" . $mainPage);
+        $getId = "SELECT id FROM users WHERE email = $email";
+        $result = runQuery($getId);
+        if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['firstName'] = $firstName;
+            $_SESSION['lastName'] = $lastName;
+            $_SESSION['email'] = $email;
+            $_SESSION['role'] = 'user';
+            header("Location:" . $mainPage);
+        }
     } else {
         header("Location:" . $registrationPage);
     }

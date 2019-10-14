@@ -37,39 +37,42 @@ include "../../controllers/dbUtils.php";
 </nav>
 <div class="container">
     <!--    user's image-->
-    <div id="usersImage" class="d-inline-block">
-    </div>
-    <div class="d-inline-block">
-        <?php
-        $id = $_GET['id'];
-        $sql = "SELECT first_name, last_name, email, photo FROM users WHERE id = $id;";
-        $result = runQuery($sql);
-        if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
-            echo '
+    <div id="fullUsersInfo">
+        <div class="d-inline-block">
+            <img src="../assets/img/defaultProfilePhoto.jpg" alt="Profile photo" id="usersImage">
+        </div>
+        <div id="usersInfo" class="d-inline-block">
+            <?php
+            $id = $_GET['id'];
+            $sql = "SELECT first_name, last_name, email, photo FROM users WHERE id = $id;";
+            $result = runQuery($sql);
+            if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+                echo '
                 <form>
                   <div class="form-group">
-                    <label for="firstName" class="col-sm-2 col-form-label">First name:</label>
+                    <label for="firstName">First name:</label>
                     <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext" id="firstName" value="' .$row['first_name']. '">
+                      <input type="text" readonly class="form-control" id="firstName" value="' . $row['first_name'] . '">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="lastName" class="col-sm-2 col-form-label">Last name:</label>
+                    <label for="lastName">Last name:</label>
                     <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext" id="lastName" value="' .$row['last_name']. '">
+                      <input type="text" readonly class="form-control" id="lastName" value="' . $row['last_name'] . '">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                    <label for="staticEmail">Email:</label>
                     <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="' .$row['email']. '">
+                      <input type="text" readonly class="form-control" id="staticEmail" value="' . $row['email'] . '">
                     </div>
                   </div>
                 </form>';
-        } else {
-            echo "<p>Oops, can't get the data(</p>";
-        }
-        ?>
+            } else {
+                echo "<p>Oops, can't get the data(</p>";
+            }
+            ?>
+        </div>
     </div>
 </div>
 </body>

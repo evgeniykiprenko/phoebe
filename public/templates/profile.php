@@ -2,7 +2,7 @@
 session_start();
 include "../../controllers/dbUtils.php";
 $id = $_GET['id'];
-$sql = "SELECT first_name, last_name, email, photo FROM users WHERE id = $id;";
+$sql = "SELECT first_name, last_name, email, password, photo FROM users WHERE id = $id;";
 $result = runQuery($sql);
 ?>
 <!doctype html>
@@ -120,7 +120,7 @@ $result = runQuery($sql);
                   </div>
                   <div class="form-group row">
                     <label for="staticPassword" class="col col-form-label col-form-label-lg">Password:</label>
-                      <input type="password" class="form-control form-control-lg" id="staticPassword">
+                      <input type="password" class="form-control form-control-lg" id="staticPassword" value="' . $row['password'] . '">
                   </div>
                   <div class="row">
                       <div class="col">

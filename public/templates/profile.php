@@ -100,10 +100,11 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
 <div class="container">
     <?php
     if ($_SESSION['id'] == $id || $_SESSION['role'] == 'admin') {
-        echo '<div class="row mx-md-n5">
+        if ($show) {
+            echo '<div class="row mx-md-n5">
         <div class="col px-md-5">
             <div>
-                <img src="' .$linkToPhoto. '" alt="Profile photo" id="usersImage">
+                <img src="' . $linkToPhoto . '" alt="Profile photo" id="usersImage">
             </div>
             <form action="../../controllers/uploadController.php?id=' . $id . '" method="post" enctype="multipart/form-data">
                 Select image to upload:
@@ -111,9 +112,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                 <input type="submit" value="Upload Image" name="submit">
             </form>
         </div>
-        <div class="col px-md-5">';
-        if ($show) {
-            echo '
+        <div class="col px-md-5">
                 <form action="../../controllers/updateProfileController.php" method="post">
                   <input type="text" class="form-control form-control-lg" id="id" value="' . $id . '" name="id" style="display: none">
                   <div class="form-group row">
@@ -141,7 +140,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                       <div class="col">
                         <div class="d-flex justify-content-end">
                             <button type="" class="btn btn-danger btn-block">
-                                <a href="../../controllers/deleteProfileController.php?id=' .$id. '" class="text-white">Delete</a>
+                                <a href="../../controllers/deleteProfileController.php?id=' . $id . '" class="text-white">Delete</a>
                             </button>   
                         <div>
                       </div>
@@ -149,20 +148,19 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                   
                 </form>';
         } else {
-            echo "<p>Oops, can\'t get the data(</p>";
+            echo "<div><p>Oops, can't get the data:(</p><a href='../index.php'>Main page</a></div>";
         }
         echo '</div>
     </div>';
     } else {
-        echo '<div class="row mx-md-n5">
+        if ($show) {
+            echo '<div class="row mx-md-n5">
         <div class="col px-md-5">
             <div>
-                <img src="' .$linkToPhoto. '" alt="Profile photo" id="usersImage">
+                <img src="' . $linkToPhoto . '" alt="Profile photo" id="usersImage">
             </div>
         </div>
-        <div class="col px-md-5">';
-        if ($show) {
-            echo '
+                <div class="col px-md-5">
                 <form>
                   <div class="form-group row">
                     <label for="firstName" class="col col-form-label col-form-label-lg">First name:</label>
@@ -178,7 +176,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                   </div>
                 </form>';
         } else {
-            echo "<p>Oops, can\'t get the data(</p>";
+            echo "<div><p>Oops, can't get the data:(</p><a href='../index.php'>Main page</a></div>";;
         }
         echo '</div>
     </div>';

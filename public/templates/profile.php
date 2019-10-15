@@ -11,7 +11,7 @@ $row = null;
 $linkToPhoto = null;
 if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
     $show = true;
-    $linkToPhoto = !empty($row['photo']) ? $row['photo'] : "../assets/img/defaultProfilePhoto.jpg";
+    $linkToPhoto = !empty($row['photo']) ? '../images/' . $row['photo'] : "../assets/img/defaultProfilePhoto.jpg";
 }
 ?>
 <!doctype html>
@@ -115,21 +115,22 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
         if ($show) {
             echo '
                 <form action="../../controllers/updateProfileController.php" method="post">
+                  <input type="text" class="form-control form-control-lg" id="id" value="' . $id . '" name="id" style="display: none">
                   <div class="form-group row">
                     <label for="firstName" class="col col-form-label col-form-label-lg">First name:</label>
-                      <input type="text" class="form-control form-control-lg" id="firstName" value="' . $row['first_name'] . '">
+                      <input type="text" class="form-control form-control-lg" id="firstName" value="' . $row['first_name'] . '" name="firstName">
                   </div>
                   <div class="form-group row">
                     <label for="lastName" class="col col-form-label col-form-label-lg">Last name:</label>
-                      <input type="text" class="form-control form-control-lg" id="lastName" value="' . $row['last_name'] . '">
+                      <input type="text" class="form-control form-control-lg" id="lastName" value="' . $row['last_name'] . '" name="lastName">
                   </div>
                   <div class="form-group row">
                     <label for="staticEmail" class="col col-form-label col-form-label-lg">Email:</label>
-                      <input type="text" class="form-control form-control-lg" id="staticEmail" value="' . $row['email'] . '">
+                      <input type="text" class="form-control form-control-lg" id="staticEmail" value="' . $row['email'] . '" name="email">
                   </div>
                   <div class="form-group row">
                     <label for="staticPassword" class="col col-form-label col-form-label-lg">Password:</label>
-                      <input type="password" class="form-control form-control-lg" id="staticPassword" value="' . $row['password'] . '">
+                      <input type="password" class="form-control form-control-lg" id="staticPassword" value="' . $row['password'] . '" name="password">
                   </div>
                   <div class="row">
                       <div class="col">
@@ -139,8 +140,8 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                       </div>
                       <div class="col">
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-danger btn-block">
-                                <a href="../../controllers/deleteProfileController.php" class="text-white">Delete</a>
+                            <button type="" class="btn btn-danger btn-block">
+                                <a href="../../controllers/deleteProfileController.php?id=' .$id. '" class="text-white">Delete</a>
                             </button>   
                         <div>
                       </div>

@@ -80,7 +80,7 @@ session_start();
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
-                            <input type="password" class="form-control" id="pwd" name="password" required>>
+                            <input type="password" class="form-control" id="pwd" name="password" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

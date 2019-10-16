@@ -76,11 +76,11 @@ session_start();
                     <form action="../controllers/authController.php" method="post">
                         <div class="form-group">
                             <label for="email">Email address:</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
-                            <input type="password" class="form-control" id="pwd" name="password">
+                            <input type="password" class="form-control" id="pwd" name="password" required>>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

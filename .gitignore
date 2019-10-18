@@ -3,3 +3,6 @@
 target
 target/*
 *.iml
+
+# do not forget to change the folder
+public/images/*

@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
     if (isValid($email) && isValid($password)) {
-        $sql = "SELECT * FROM users WHERE email = '" . $email . "';";
+        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password';";
         $result = runQuery($sql);
         if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
             $_SESSION['id'] = $row['id'];

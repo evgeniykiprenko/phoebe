@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
         $addUserSql = "INSERT INTO users (first_name, last_name, email, password)
             VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "', '" . $password . "');";
         runQuery($addUserSql);
-        $getId = "SELECT id FROM users WHERE email = $email";
+        $getId = "SELECT id FROM users WHERE email = '$email';";
         $result = runQuery($getId);
         if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
             $_SESSION['id'] = $row['id'];

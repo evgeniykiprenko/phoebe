@@ -102,7 +102,7 @@ session_start();
             die('Oops, something went wrong! Try again, please.');
         }
 
-        $sql = "SELECT id, first_name, last_name, email FROM users WHERE role_id = 2;";
+        $sql = "SELECT id, first_name, last_name, email, role_id FROM users;";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -114,15 +114,23 @@ session_start();
                     <td>First name</td>
                     <td>Last name</td>
                     <td>Email</td>
+                    <td>Role</td>
                    </tr>
                    </thead>';
             while ($row = $result->fetch_assoc()) {
+                $role = null;
+                if ($row['role_id'] == 1) {
+                    $role = 'Admin';
+                } else {
+                    $role ='User';
+                }
                 echo "<tbody>
                       <tr>
                         <td><a href='templates/profile.php?id=" . $row["id"] . "'>" . $row["id"] . "</a></td>
                         <td>" . $row["first_name"] . "</td>
                         <td>" . $row["last_name"] . "</td>
                         <td>" . $row["email"] . "</td>
+                        <td>" . $role . "</td>
                       </tr>
                       </tbody>";
             }

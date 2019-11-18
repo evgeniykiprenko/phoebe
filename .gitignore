@@ -3,6 +3,7 @@
 target
 target/*
 *.iml
+*.code-workspace
 
 # do not forget to change the folder
 public/images/*

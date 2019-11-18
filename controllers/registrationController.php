@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
     $registrationPage = "../public/templates/registrationPage.php";
 
-    if (isValid($email) && isValid($password) && isValid($firstName) && isValid($lastName)) {
+    if (isValid($email) && isValid($password) && isValid($firstName) && isValid($lastName) && checkEmailOriginality($email)) {
         $addUserSql = "INSERT INTO users (first_name, last_name, email, password)
             VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "', '" . $password . "');";
         runQuery($addUserSql);
@@ -32,6 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
             header("Location:" . $mainPage);
         }
     } else {
-        header("Location:" . $registrationPage);
+        header("Location:" . $registrationPage . "?notOriginalEmail=true");
     }
 }

@@ -14,3 +14,8 @@ function runQuery($sql) {
     mysqli_close($conn);
     return $result;
 }
+
+function checkEmailOriginality($email) {
+    $sql = "SELECT id FROM users WHERE email = '$email';";
+    return runQuery($sql)->num_rows == 0;
+}

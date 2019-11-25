@@ -1,10 +1,10 @@
 <?php
-include 'validationUtils.php';
-include 'dbUtils.php';
+include 'utils/validationUtils.php';
+include 'utils/dbUtils.php';
 
 session_start();
 
-$mainPage = '../public/index.php';
+$mainPage = '/phoebe/public/index.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['incorrect'] = false;

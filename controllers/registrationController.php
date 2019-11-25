@@ -1,10 +1,10 @@
 <?php
-include 'validationUtils.php';
-include 'dbUtils.php';
+include 'utils/dbUtils.php';
+include 'utils/validationUtils.php';
 
 session_start();
 
-$mainPage = "../public/index.php";
+$mainPage = "/phoebe/public/index.php";
 
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     header("Location:" . $mainPage);
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
 
-    $registrationPage = "../public/templates/registrationPage.php";
+    $registrationPage = "/phoebe/public/templates/registrationPage.php";
 
     if (isValid($email) && isValid($password) && isValid($firstName) && isValid($lastName) && checkEmailOriginality($email)) {
         $addUserSql = "INSERT INTO users (first_name, last_name, email, password)

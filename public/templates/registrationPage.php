@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$mainPage = "../index.php";
+$mainPage = "/phoebe/index.php";
 if(isset($_SESSION['email'])) {
     header("Location: " . $mainPage);
 }
@@ -22,14 +22,14 @@ if(isset($_SESSION['email'])) {
 <body>
 
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="../index.php">
-        <img src="../assets/img/logo.png" width="135" height="50" alt="Phoebe">
+    <a class="navbar-brand" href="/phoebe/public/index.php">
+        <img src="/phoebe/public/assets/img/logo.png" width="135" height="50" alt="Phoebe">
     </a>
 </nav>
 
 <div class="container">
     <div>
-        <form action="../../controllers/registrationController.php" method="post">
+        <form action="/phoebe/controllers/registrationController.php" method="post">
             <div class="form-group">
                 <label for="firstName">First name:</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" required>
@@ -51,7 +51,7 @@ if(isset($_SESSION['email'])) {
     </div>
     <div class="text-right">
         <span>
-            <a href="../index.php">Back to main page</a>
+            <a href="/phoebe/public/index.php">Back to main page</a>
         </span>
     </div>
 </div>

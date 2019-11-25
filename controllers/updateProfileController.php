@@ -1,10 +1,10 @@
 <?php
-include 'validationUtils.php';
-include 'dbUtils.php';
+include 'utils/validationUtils.php';
+include 'utils/dbUtils.php';
 
 session_start();
 
-$profilePage = "../public/templates/profile.php";
+$profilePage = "/phoebe/public/templates/profile.php";
 
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     header("Location: $profilePage?id=$id");

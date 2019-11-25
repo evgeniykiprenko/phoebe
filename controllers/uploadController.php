@@ -1,8 +1,8 @@
 <?php
-include "dbUtils.php";
+include "utils/dbUtils.php";
 
 $id = $_GET['id'];
-$target_dir = "../public/images/";
+$target_dir = $_SERVER['DOCUMENT_ROOT']."/phoebe/public/images/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $file_name = basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -49,7 +49,7 @@ if ($uploadOk == 0) {
     }
 }
 
-header("Location: ../public/templates/profile.php?id=$id");
+header("Location: /phoebe/public/templates/profile.php?id=$id");
 
 
 

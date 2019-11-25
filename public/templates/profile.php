@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "../../controllers/dbUtils.php";
-include "../../controllers/validationUtils.php";
+include $_SERVER['DOCUMENT_ROOT']."/phoebe/controllers/utils/dbUtils.php";
+include $_SERVER['DOCUMENT_ROOT']."/phoebe/controllers/utils/validationUtils.php";
 
 $id = $_GET['id'];
 $sql = "SELECT first_name, last_name, email, password, photo FROM users WHERE id = $id;";
@@ -11,7 +11,7 @@ $row = null;
 $linkToPhoto = null;
 if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
     $show = true;
-    $linkToPhoto = !empty($row['photo']) ? '../images/' . $row['photo'] : "../assets/img/defaultProfilePhoto.jpg";
+    $linkToPhoto = !empty($row['photo']) ? '/phoebe/public/images/' . $row['photo'] : "/phoebe/public/assets/img/defaultProfilePhoto.jpg";
 }
 ?>
 <!doctype html>
@@ -22,7 +22,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="/phoebe/public/assets/css/main.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -34,8 +34,8 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
 </head>
 <body>
 <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="../index.php">
-        <img src="../assets/img/logo.png" width="135" height="50" alt="Phoebe">
+    <a class="navbar-brand" href="/phoebe/public/index.php">
+        <img src="/phoebe/public/assets/img/logo.png" width="135" height="50" alt="Phoebe">
     </a>
     <?php
     if (empty($_SESSION['email'])) {
@@ -55,12 +55,12 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
         echo '<div class="text-right">
         <span>
             <button type="button" class="btn btn-info nav-button">
-                <a href="../index.php" class="text-white">Main page</a>
+                <a href="/phoebe/public/index.php" class="text-white">Main page</a>
             </button>
         </span>
         <span>
             <button type="button" class="btn btn-danger logout-button">
-                <a href="../../controllers/logoutController.php" class="text-white">Logout</a>
+                <a href="/phoebe/controllers/logoutController.php" class="text-white">Logout</a>
             </button>
         </span>
     </div>';
@@ -81,7 +81,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="../../controllers/authController.php" method="post">
+                <form action="/phoebe/controllers/authController.php" method="post">
                     <div class="form-group">
                         <label for="email">Email address:</label>
                         <input type="email" class="form-control" id="email" name="email" required>
@@ -106,14 +106,14 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
             <div>
                 <img src="' . $linkToPhoto . '" alt="Profile photo" id="usersImage">
             </div>
-            <form action="../../controllers/uploadController.php?id=' . $id . '" method="post" enctype="multipart/form-data">
+            <form action="/phoebe/controllers/uploadController.php?id=' . $id . '" method="post" enctype="multipart/form-data">
                 Select image to upload:
                 <input type="file" name="fileToUpload" id="fileToUpload">
                 <input type="submit" value="Upload Image" name="submit">
             </form>
         </div>
         <div class="col px-md-5">
-                <form action="../../controllers/updateProfileController.php" method="post">
+                <form action="/phoebe/controllers/updateProfileController.php" method="post">
                   <input type="text" class="form-control form-control-lg" id="id" value="' . $id . '" name="id" style="display: none">
                   <div class="form-group row">
                     <label for="firstName" class="col col-form-label col-form-label-lg">First name:</label>
@@ -140,7 +140,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                       <div class="col">
                         <div class="d-flex justify-content-end">
                             <button type="" class="btn btn-danger btn-block">
-                                <a href="../../controllers/deleteProfileController.php?id=' . $id . '" class="text-white">Delete</a>
+                                <a href="/phoebe/controllers/deleteProfileController.php?id=' . $id . '" class="text-white">Delete</a>
                             </button>   
                         <div>
                       </div>
@@ -148,7 +148,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                   
                 </form>';
         } else {
-            echo "<div><p>Oops, can't get the data:(</p><a href='../index.php'>Main page</a></div>";
+            echo "<div><p>Oops, can't get the data:(</p><a href='/phoebe/public/index.php'>Main page</a></div>";
         }
         echo '</div>
     </div>';
@@ -176,7 +176,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                   </div>
                 </form>';
         } else {
-            echo "<div><p>Oops, can't get the data:(</p><a href='../index.php'>Main page</a></div>";;
+            echo "<div><p>Oops, can't get the data:(</p><a href='/phoebe/public/index.php'>Main page</a></div>";;
         }
         echo '</div>
     </div>';

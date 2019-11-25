@@ -89,6 +89,19 @@ session_start();
             </div>
         </div>
     </div>
+    
+    <!-- temporary part (file.txt also) -->
+    <div class="container">
+        <button id="button">Get text file</button>
+    </div>
+
+    <script>
+        document.getElementById('button').addEventListener('click', loadText);
+
+        function loadText() {
+            console.log('button clicked');
+        }
+    </script>
 </body>
 
 </html>

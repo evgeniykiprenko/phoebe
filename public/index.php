@@ -93,13 +93,60 @@ session_start();
     <!-- temporary part (file.txt also) -->
     <div class="container">
         <button id="button">Get text file</button>
+        <br>
+        <div id="text"></div>
     </div>
 
     <script>
         document.getElementById('button').addEventListener('click', loadText);
 
         function loadText() {
-            console.log('button clicked');
+            //Create XHR object
+            let xhr = new XMLHttpRequest();
+            //OPEN - type, url/file, async(true/false)
+            xhr.open('GET', '/phoebe/file.txt', true);
+
+            console.log('READYSTATE: ', xhr.readyState);
+            
+            //OPTIONAL - used for loaders. The function executes when the request is in progress
+            xhr.onprogress = function() {
+                console.log('READYSTATE: ', xhr.readyState);    
+            }
+
+            //this function will be executed on onload state
+            xhr.onload = function() {
+                console.log('READYSTATE: ', xhr.readyState); 
+                //the server response can be different (404, 300, etc) 
+                if (this.status == 200) {
+                    // console.log(this.responseText);
+                    document.getElementById('text').innerHTML = this.responseText;
+                } else if (this.status == 404) {
+                    document.getElementById('text').innerHTML = 'Not found'; 
+                }
+            }
+            
+            //the function executes on any error
+            xhr.onerror = function() {
+                console.log('Request error...');
+            }
+            
+            //this function will be executed on any state changing
+            xhr.onreadystatechange = function() {
+                console.log('READYSTATE: ', xhr.readyState);
+                if (this.readyState === 4 && this.status === 200) {
+                    // console.log(this.responseText);
+                }
+            }
+            
+            // Holds the status of the XMLHttpRequest.
+            // 0: request not initialized
+            // 1: server connection established
+            // 2: request received
+            // 3: processing request
+            // 4: request finished and response is ready
+
+            //Sends request
+            xhr.send();
         }
     </script>
 </body>

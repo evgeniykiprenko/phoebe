@@ -96,10 +96,17 @@ session_start();
             <input type="text" name="name" id="name">
             <input type="submit" value="Submit">
         </form>   
+
+        <h3>AJAX POST FORM</h3>
+        <form id="postForm">
+            <input type="text" name="name" id="name2">
+            <input type="submit" value="Submit">
+        </form> 
     </div>
 
     <script>
         document.getElementById('getForm').addEventListener('submit', getName);
+        document.getElementById('postForm').addEventListener('submit', postName);
 
         function getName(e) {
             e.preventDefault();
@@ -114,6 +121,24 @@ session_start();
             }
 
             xhr.send();
+        }
+
+        function postName(e) {
+            e.preventDefault();
+
+            let name = document.getElementById('name2').value;
+            let params = 'name=' + name;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/phoebe/process.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            
+            xhr.onload = function() {
+                console.log(this.responseText);
+            }
+
+            xhr.send(params);
         }
     </script>
 </body>

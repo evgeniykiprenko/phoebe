@@ -92,57 +92,38 @@ session_start();
 
     <!-- temporary part (file.txt also) -->
     <div class="container">
-        <button id="button1">Get User</button>
-        <button id="button2">Get Users</button>
+        <h3>External API: Load GitHub users</h3>
+        <button id="button">Load user</button>
         <br><br>
-        <h3>User</h3>
-        <div id="user"></div>
-        <h3>Users</h3>
+        <h4>Gitub users</h4>
         <div id="users"></div>
     </div>
 
     <script>
-        document.getElementById('button1').addEventListener('click', loadUser);
-        document.getElementById('button2').addEventListener('click', loadUsers);
-
-        function loadUser() {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', '/phoebe/user.json', true);
-
-            xhr.onload = function() {
-                if (this.status === 200) {
-                    let user = JSON.parse(this.responseText);
-
-                    let output = '';
-                    output += '<ul>' +
-                        '<li>ID: ' + user.id + '</li>' +
-                        '<li>Name: ' + user.name + '</li>' +
-                        '<li>Email: ' + user.email + '</li>' +
-                        '</ul>';
-
-                    document.getElementById('user').innerHTML = output;
-                }
-            }
-
-            xhr.send();
-        }
+        document.getElementById('button').addEventListener('click', loadUsers);
+        
+        //Load GitHub Users
 
         function loadUsers() {
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', '/phoebe/users.json', true);
-
+            xhr.open('GET', 'https://api.github.com/users', true);
+            
             xhr.onload = function() {
-                if (this.status === 200) {
+                if (this.status == 200) {
                     let users = JSON.parse(this.responseText);
-
+                    
                     let output = '';
 
                     for (const i in users) {
-                        output += '<ul>' +
+                        output +=
+                            '<div class="user">' +
+                            '<img src="' + users[i].avatar_url + '"width="70"' +
+                            'height="70">' + 
+                            '<ul>' +
                             '<li>ID: ' + users[i].id + '</li>' +
-                            '<li>Name: ' + users[i].name + '</li>' +
-                            '<li>Email: ' + users[i].email + '</li>' +
-                            '</ul>';
+                            '<li>Login: ' + users[i].login + '</li>' +
+                            '</ul>' +
+                            '</div>';
                     }
 
                     document.getElementById('users').innerHTML = output;
@@ -151,6 +132,8 @@ session_start();
 
             xhr.send();
         }
+
+        
     </script>
 </body>
 

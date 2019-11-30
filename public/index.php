@@ -90,50 +90,31 @@ session_start();
         </div>
     </div>
 
-    <!-- temporary part (file.txt also) -->
     <div class="container">
-        <h3>External API: Load GitHub users</h3>
-        <button id="button">Load user</button>
-        <br><br>
-        <h4>Gitub users</h4>
-        <div id="users"></div>
+        <h3>AJAX GET FORM</h3>
+        <form id="getForm">
+            <input type="text" name="name" id="name">
+            <input type="submit" value="Submit">
+        </form>   
     </div>
 
     <script>
-        document.getElementById('button').addEventListener('click', loadUsers);
-        
-        //Load GitHub Users
+        document.getElementById('getForm').addEventListener('submit', getName);
 
-        function loadUsers() {
+        function getName(e) {
+            e.preventDefault();
+
+            let name = document.getElementById('name').value;
+
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://api.github.com/users', true);
+            xhr.open('GET', '/phoebe/process.php?name=' + name, true);
             
             xhr.onload = function() {
-                if (this.status == 200) {
-                    let users = JSON.parse(this.responseText);
-                    
-                    let output = '';
-
-                    for (const i in users) {
-                        output +=
-                            '<div class="user">' +
-                            '<img src="' + users[i].avatar_url + '"width="70"' +
-                            'height="70">' + 
-                            '<ul>' +
-                            '<li>ID: ' + users[i].id + '</li>' +
-                            '<li>Login: ' + users[i].login + '</li>' +
-                            '</ul>' +
-                            '</div>';
-                    }
-
-                    document.getElementById('users').innerHTML = output;
-                }
+                console.log(this.responseText);
             }
 
             xhr.send();
         }
-
-        
     </script>
 </body>
 

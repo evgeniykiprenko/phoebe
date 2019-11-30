@@ -91,54 +91,53 @@ session_start();
     </div>
 
     <div class="container">
-        <h3>AJAX GET FORM</h3>
-        <form id="getForm">
-            <input type="text" name="name" id="name">
-            <input type="submit" value="Submit">
-        </form>   
-
-        <h3>AJAX POST FORM</h3>
-        <form id="postForm">
-            <input type="text" name="name" id="name2">
-            <input type="submit" value="Submit">
-        </form> 
+        <div id="users"></div>
     </div>
 
     <script>
-        document.getElementById('getForm').addEventListener('submit', getName);
-        document.getElementById('postForm').addEventListener('submit', postName);
-
-        function getName(e) {
-            e.preventDefault();
-
-            let name = document.getElementById('name').value;
-
+        function showUsers() {
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', '/phoebe/process.php?name=' + name, true);
-            
+            xhr.open('GET', '/phoebe/controllers/showAllUsersController.php', true);
+
             xhr.onload = function() {
-                console.log(this.responseText);
+                let output = '';
+                if (this.status == 200) {
+                    let users = JSON.parse(this.responseText);
+
+                    output += '<div class="py-5">' +
+                    '<table class="table table-hover table-bordered">' +
+                    '<thead><tr>' +
+                    '<td>#</td>' +
+                    '<td>First name</td>' +
+                    '<td>Last name</td>' +
+                    '<td>Email</td>' +
+                    '<td>Role</td>' +
+                    '</tr></thead>';
+
+                    for (const user in users) {
+                        let role = users[user].id == 1 ? 'Admin' : 'User';
+                        let id = users[user].id;
+                        output += '<tbody><tr>' +
+                                    '<td><a href="templates/profile.php?id=' + id + '">' + id + '</a></td>' +
+                                    '<td>' + users[user].first_name + '</td>' +
+                                    '<td>' + users[user].last_name + '</td>' +
+                                    '<td>' + users[user].email + '</td>' +
+                                    '<td>' + role + '</td>' +
+                                 '</tr></tbody>';
+                    }
+                    output += '</table></div>';
+                } else {
+                    output += 'Oops, something went wrong. Try again, please.'
+                }
+                console.log(output);
+                document.getElementById('users').innerHTML = output;
             }
 
             xhr.send();
         }
 
-        function postName(e) {
-            e.preventDefault();
-
-            let name = document.getElementById('name2').value;
-            let params = 'name=' + name;
-
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', '/phoebe/process.php', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-            
-            xhr.onload = function() {
-                console.log(this.responseText);
-            }
-
-            xhr.send(params);
+        window.onload = function() {
+            showUsers();
         }
     </script>
 </body>

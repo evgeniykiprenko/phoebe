@@ -89,63 +89,66 @@ session_start();
             </div>
         </div>
     </div>
-    
+
     <!-- temporary part (file.txt also) -->
     <div class="container">
-        <button id="button">Get text file</button>
-        <br>
-        <div id="text"></div>
+        <button id="button1">Get User</button>
+        <button id="button2">Get Users</button>
+        <br><br>
+        <h3>User</h3>
+        <div id="user"></div>
+        <h3>Users</h3>
+        <div id="users"></div>
     </div>
 
     <script>
-        document.getElementById('button').addEventListener('click', loadText);
+        document.getElementById('button1').addEventListener('click', loadUser);
+        document.getElementById('button2').addEventListener('click', loadUsers);
 
-        function loadText() {
-            //Create XHR object
+        function loadUser() {
             let xhr = new XMLHttpRequest();
-            //OPEN - type, url/file, async(true/false)
-            xhr.open('GET', '/phoebe/file.txt', true);
+            xhr.open('GET', '/phoebe/user.json', true);
 
-            console.log('READYSTATE: ', xhr.readyState);
-            
-            //OPTIONAL - used for loaders. The function executes when the request is in progress
-            xhr.onprogress = function() {
-                console.log('READYSTATE: ', xhr.readyState);    
-            }
-
-            //this function will be executed on onload state
             xhr.onload = function() {
-                console.log('READYSTATE: ', xhr.readyState); 
-                //the server response can be different (404, 300, etc) 
-                if (this.status == 200) {
-                    // console.log(this.responseText);
-                    document.getElementById('text').innerHTML = this.responseText;
-                } else if (this.status == 404) {
-                    document.getElementById('text').innerHTML = 'Not found'; 
-                }
-            }
-            
-            //the function executes on any error
-            xhr.onerror = function() {
-                console.log('Request error...');
-            }
-            
-            //this function will be executed on any state changing
-            xhr.onreadystatechange = function() {
-                console.log('READYSTATE: ', xhr.readyState);
-                if (this.readyState === 4 && this.status === 200) {
-                    // console.log(this.responseText);
-                }
-            }
-            
-            // Holds the status of the XMLHttpRequest.
-            // 0: request not initialized
-            // 1: server connection established
-            // 2: request received
-            // 3: processing request
-            // 4: request finished and response is ready
+                if (this.status === 200) {
+                    let user = JSON.parse(this.responseText);
 
-            //Sends request
+                    let output = '';
+                    output += '<ul>' +
+                        '<li>ID: ' + user.id + '</li>' +
+                        '<li>Name: ' + user.name + '</li>' +
+                        '<li>Email: ' + user.email + '</li>' +
+                        '</ul>';
+
+                    document.getElementById('user').innerHTML = output;
+                }
+            }
+
+            xhr.send();
+        }
+
+        function loadUsers() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/phoebe/users.json', true);
+
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    let users = JSON.parse(this.responseText);
+
+                    let output = '';
+
+                    for (const i in users) {
+                        output += '<ul>' +
+                            '<li>ID: ' + users[i].id + '</li>' +
+                            '<li>Name: ' + users[i].name + '</li>' +
+                            '<li>Email: ' + users[i].email + '</li>' +
+                            '</ul>';
+                    }
+
+                    document.getElementById('users').innerHTML = output;
+                }
+            }
+
             xhr.send();
         }
     </script>

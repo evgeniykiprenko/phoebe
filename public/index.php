@@ -15,6 +15,7 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src ="/phoebe/public/assets/js/ajax/showUsersList.js"></script>
     <title>Phoebe</title>
 </head>
 
@@ -93,53 +94,6 @@ session_start();
     <div class="container">
         <div id="users"></div>
     </div>
-
-    <script>
-        function showUsers() {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', '/phoebe/controllers/showAllUsersController.php', true);
-
-            xhr.onload = function() {
-                let output = '';
-                if (this.status == 200) {
-                    let users = JSON.parse(this.responseText);
-
-                    output += '<div class="py-5">' +
-                    '<table class="table table-hover table-bordered">' +
-                    '<thead><tr>' +
-                    '<td>#</td>' +
-                    '<td>First name</td>' +
-                    '<td>Last name</td>' +
-                    '<td>Email</td>' +
-                    '<td>Role</td>' +
-                    '</tr></thead>';
-
-                    for (const user in users) {
-                        let role = users[user].id == 1 ? 'Admin' : 'User';
-                        let id = users[user].id;
-                        output += '<tbody><tr>' +
-                                    '<td><a href="templates/profile.php?id=' + id + '">' + id + '</a></td>' +
-                                    '<td>' + users[user].first_name + '</td>' +
-                                    '<td>' + users[user].last_name + '</td>' +
-                                    '<td>' + users[user].email + '</td>' +
-                                    '<td>' + role + '</td>' +
-                                 '</tr></tbody>';
-                    }
-                    output += '</table></div>';
-                } else {
-                    output += 'Oops, something went wrong. Try again, please.'
-                }
-                console.log(output);
-                document.getElementById('users').innerHTML = output;
-            }
-
-            xhr.send();
-        }
-
-        window.onload = function() {
-            showUsers();
-        }
-    </script>
 </body>
 
 </html>

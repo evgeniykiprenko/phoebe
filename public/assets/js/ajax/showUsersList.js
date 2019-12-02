@@ -27,15 +27,26 @@ function showUsers(sortBy) {
 
   xhr.onload = function() {
     let output = "";
-    if (this.status == 200) {
+    if (this.status === 200) {
       let users = JSON.parse(this.responseText);
-      console.log(users);
       output = formatUsersTable(output, users);
-      console.log("Users");
-    } else {
-      output += "Oops, something went wrong. Try again, please.";
     }
-    document.getElementById("users").innerHTML = output;
+    const showUsersPromise = new Promise((resolve, reject) => {
+      if (output !== "") {
+        document.getElementById("users").innerHTML = output; 
+        resolve();
+      } else {
+        reject();
+      }
+    });
+
+    showUsersPromise.then(
+      () => {
+        document.getElementById('firstName').addEventListener('click', showUsersListSortedByFirstName);
+      },
+      () => {
+        document.getElementById("users").innerHTML = "Oops, reload the page, please:(";
+      });
   };
 
   xhr.send();
@@ -43,7 +54,7 @@ function showUsers(sortBy) {
 
 window.onload = function() {
   showUsers();
-  this.document.getElementById('firstName').addEventListener('click', showUsersListSortedByFirstName);
+  // this.document.getElementById('firstName').addEventListener('click', showUsersListSortedByFirstName);
 };
 
 function formatUsersTable(output, users) {

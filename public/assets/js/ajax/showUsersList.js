@@ -10,13 +10,7 @@ function showUsers(sortBy) {
   if (sortBy == undefined || typeof sortBy != "string") {
     url = "/phoebe/controllers/showAllUsersController.php";      
   } else {
-    switch (sortBy) {
-        case "firstName": {
-            url = "/phoebe/controllers/showAllUsersController.php?orderByLastName=true";   
-            break; 
-        }
-
-    }
+    url = "/phoebe/controllers/showAllUsersController.php/?sortBy" + sortBy + "=true";
   }
 
   xhr.open(
@@ -42,7 +36,11 @@ function showUsers(sortBy) {
 
     showUsersPromise.then(
       () => {
-        document.getElementById('firstName').addEventListener('click', showUsersListSortedByFirstName);
+        document.getElementById('id_column').addEventListener('click', showUsersListSortedById);
+        document.getElementById('first_name_column').addEventListener('click', showUsersListSortedByFirstName);
+        document.getElementById('last_name_column').addEventListener('click', showUsersListSortedByLastName);
+        document.getElementById('email_column').addEventListener('click', showUsersListSortedByEmail);
+        document.getElementById('role_column').addEventListener('click', showUsersListSortedByRole);
       },
       () => {
         document.getElementById("users").innerHTML = "Oops, reload the page, please:(";
@@ -54,11 +52,10 @@ function showUsers(sortBy) {
 
 window.onload = function() {
   showUsers();
-  // this.document.getElementById('firstName').addEventListener('click', showUsersListSortedByFirstName);
 };
 
 function formatUsersTable(output, users) {
-  if (users == undefined || users == null) {
+  if (users === undefined || users == null) {
     return "";
   }
 
@@ -66,15 +63,15 @@ function formatUsersTable(output, users) {
     '<div class="py-5">' +
     '<table class="table table-hover table-bordered">' +
     '<thead><tr>' +
-    '<td>#</td>' +
-    '<td><a href="#" id="firstName">First name</td>' +
-    '<td>Last name</td>' +
-    '<td>Email</td>' +
-    '<td>Role</td>' +
+    '<td><a href="#" id="id_column">ID</a></td>' +
+    '<td><a href="#" id="first_name_column">First name</a></td>' +
+    '<td><a href="#" id="last_name_column">Last name</a></td>' +
+    '<td><a href="#" id="email_column">Email</a></td>' +
+    '<td><a href="#" id="role_column">Role</a></td>' +
     '</tr></thead>';
 
   for (const user in users) {
-    let role = users[user].id == 1 ? "Admin" : "User";
+    let role = users[user].id === 1 ? "Admin" : "User";
     let id = users[user].id;
     output +=
       "<tbody><tr>" +
@@ -101,6 +98,23 @@ function formatUsersTable(output, users) {
   return output;
 }
 
-function showUsersListSortedByFirstName() {
-    showUsers('firstName');    
+function showUsersListSortedById() {
+  showUsers('Id');    
 }
+
+function showUsersListSortedByFirstName() {
+    showUsers('FirstName');    
+}
+
+function showUsersListSortedByLastName() {
+  showUsers('LastName');    
+}
+
+function showUsersListSortedByEmail() {
+  showUsers('Email');    
+}
+
+function showUsersListSortedByRole() {
+  showUsers('Role');    
+}
+

@@ -79,11 +79,13 @@ session_start();
                             <div class="form-group">
                                 <label for="email">Email address:</label>
                                 <input type="text" id="login" name="email" required>
+                                <div id="login_hint"></div>
+                            </div>
                             </div>
                             <div class="form-group">
                                 <label for="pwd">Password:</label>
                                 <input type="password" id="pwd" name="password" required>
-                            </div>
+                                <div id="login_hint"></div>
                             <button type="submit" class="btn btn-primary" onclick="validateLogin()">Submit</button>
                         </form>
                     </div>

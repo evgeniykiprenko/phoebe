@@ -4,6 +4,7 @@ target
 target/*
 *.iml
 *.code-workspace
+launch.json
 
 # do not forget to change the folder
 public/images/*

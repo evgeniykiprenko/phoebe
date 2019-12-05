@@ -11,7 +11,6 @@ session_start();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/hint.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -78,16 +77,18 @@ session_start();
                     <div class="modal-body">
                         <!-- <form action="/phoebe/controllers/authController.php" method="post"> -->
                         <form>
-                            <div>
-                                <label for="email">Email address:</label>
-                                <input type="text" id="login" name="email">
-                            </div>
-                            <div id="login_hint" class="hint"></div>
-                            <div>
-                                <label for="pwd">Password:</label>
-                                <input type="password" id="pwd" name="password">
-                                <div id="login_hint"></div>
-                                <button type="button" class="btn btn-primary" onclick="validateLogin()">Submit</button>
+                            <div id="login-form">
+                                <div class="field">
+                                    <label for="email">Email address:</label>
+                                    <input type="text" id="login" name="email">
+                                    <div id="login-hint" class="hint field"></div>
+                                </div>
+                                <div class="field">
+                                    <label for="pwd">Password:</label>
+                                    <input type="password" id="pwd" name="password">
+                                    <div id="password-hint"></div>
+                                </div>
+                                <button type="button" id="login-button" class="btn btn-success" onclick="validateAndSignIn()">Sign In</button>
                             </div>
                         </form>
                     </div>

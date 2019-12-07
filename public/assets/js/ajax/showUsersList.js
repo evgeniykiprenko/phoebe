@@ -19,10 +19,10 @@ function showUsers(sortBy) {
     true
   );
 
-  xhr.onload = function() {
+  xhr.onload = () => {
     let output = "";
-    if (this.status === 200) {
-      let users = JSON.parse(this.responseText);
+    if (xhr.status === 200) {
+      let users = JSON.parse(xhr.responseText);
       output = formatUsersTable(output, users);
     }
     const showUsersPromise = new Promise((resolve, reject) => {
@@ -50,9 +50,7 @@ function showUsers(sortBy) {
   xhr.send();
 }
 
-window.onload = function() {
-  showUsers();
-};
+window.onload = () => showUsers();
 
 function formatUsersTable(output, users) {
   if (users === undefined || users == null) {

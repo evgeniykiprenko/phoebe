@@ -1,35 +1,73 @@
 function validateAndSignIn() {
-  validateLogin();
+  if (validateLogin() && valdiatePassword()) {
+    alert('Signed In!');
+  }
 }
+
+const fieldBorderColor = "#C70039";
 
 function validateLogin() {
   let emailField = document.getElementById("login");
   let email = emailField.value;
   let hint = document.getElementById("login-hint");
 
-  let fieldBorderColor = "#C70039";
-
-  emailField.style.borderColor = "";
   hint.innerText = "";
 
-  if (!email) {
-    hint.innerText = "Enter youre email";
-    emailField.style.borderColor = fieldBorderColor;
-  } else if (!validateEmail(email)) {
-    hint.innerText = "Please provide a valid email address.";
-    emailField.style.borderColor = fieldBorderColor;
+  function isValidEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
+
+  if (!email) {
+    hint.innerText = "Enter youre email.";
+    return;
+  } else if (!isValidEmail(email)) {
+    hint.innerText = "Provide a valid email address.";
+    return;
+  } 
+
+  return true;
 }
 
 function valdiatePassword() {
-  let password = document.getElementById("password").value;
+  let passwordField = document.getElementById("pwd");
+  let password = passwordField.value;
+  let hint = document.getElementById('pwd-hint');
+
+  passwordField.style.borderColor = "initial";
+  hint.innerText = "";
+
+  if (!password) {
+    hint.innerText = 'Enter your password.';
+    return;
+  }
+
+  return true;
 }
 
-function validateEmail(email) {
-  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
-}
+// function isOriginalEmail(email) {
+//   return new Promise((resolve, reject) => {
+//     let xhr = new XMLHttpRequest();
 
-function isOriginalEmail(email) {
-  let xhr = new XMLHttpRequest();
-}
+//     xhr.open("POST", '/phoebe/controllers/emailOriginalityCheckController.php', true);
+
+//     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+//     xhr.onload = () => {
+//       if (xhr.status == 200) {
+//         if (xhr.responseText === 'true') {
+//           resolve();
+//         }
+//         reject()
+//       }
+//     }
+
+//     xhr.send('email=' + email);
+//   });
+// }
+
+  //At least 8 characters, 1 digit and 1 uppercase letter.
+  // function isValidPassword(password) {
+  //   let re = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+  //   return re.test(password);
+  // }

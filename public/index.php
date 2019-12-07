@@ -81,13 +81,13 @@ session_start();
                                 <div class="field">
                                     <label for="email">Email address:</label>
                                     <input type="text" id="login" name="email">
-                                    <div id="login-hint" class="hint field"></div>
                                 </div>
+                                <div id="login-hint" class="hint field"></div>
                                 <div class="field">
                                     <label for="pwd">Password:</label>
                                     <input type="password" id="pwd" name="password">
-                                    <div id="password-hint"></div>
                                 </div>
+                                <div id="pwd-hint" class="hint field"></div>
                                 <button type="button" id="login-button" class="btn btn-success" onclick="validateAndSignIn()">Sign In</button>
                             </div>
                         </form>

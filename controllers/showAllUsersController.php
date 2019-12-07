@@ -1,6 +1,6 @@
 <?php
 
- include "utils/dbUtils.php";
+include "utils/dbUtils.php";
 
 session_start();
 

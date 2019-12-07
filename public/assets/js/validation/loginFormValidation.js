@@ -1,6 +1,6 @@
 function validateAndSignIn() {
   if (validateLogin() && valdiatePassword()) {
-    alert('Signed In!');
+    signIn();
   }
 }
 

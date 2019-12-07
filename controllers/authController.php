@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
     if (isValid($email) && isValid($password)) {
-        $password = password_hash($password, PASSWORD_DEFAULT);
+        // $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password';";
         $result = runQuery($sql);
         if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
@@ -23,11 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $_SESSION['role'] = 'user';
             }
+
+            header('Location: ' . $mainPage);
+            exit;
         }
-    } else {
-
     }
-}
 
-header('Location: ' . $mainPage);
+    echo 'incorrect';
+}
 

@@ -24,7 +24,7 @@ function validateLogin() {
   } else if (!isValidEmail(email)) {
     hint.innerText = "Provide a valid email address.";
     return;
-  } 
+  }
 
   return true;
 }
@@ -66,32 +66,35 @@ function valdiatePassword() {
 //   });
 // }
 
-  //At least 8 characters, 1 digit and 1 uppercase letter.
-  // function isValidPassword(password) {
-  //   let re = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-  //   return re.test(password);
-  // }
+//At least 8 characters, 1 digit and 1 uppercase letter.
+// function isValidPassword(password) {
+//   let re = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+//   return re.test(password);
+// }
 
-  function signIn() {
-    let email = document.getElementById("login").value;
-    let password = document.getElementById("pwd").value;
+function signIn() {
+  let email = document.getElementById("login").value;
+  let password = document.getElementById("pwd").value;
 
-    let xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
 
-    var params = 'email=' + email + '&password=' + password;
+  var params = 'email=' + email + '&password=' + password;
 
-    xhr.onload = () => {
-            if (xhr.status == 200 && xhr.responseText === 'incorrect') {
-              let hint = document.getElementById('pwd-hint');
-              hint.innerText = 'Incorrect login or password.';  
-            } else {
-              window.location.reload(true);
-            }
-          }
+  xhr.onload = () => {
+    if (xhr.status == 200) {
+      let response = xhr.responseText;
+      if (response === 'incorrect') {
+        let hint = document.getElementById('pwd-hint');
+        hint.innerText = 'Incorrect login or password.';
+      } else if (response === 'success') {
+        window.location.reload(true);
+      }
+    }
+  }
 
-    xhr.open("POST", '/phoebe/controllers/authController.php', true);
+  xhr.open("POST", '/phoebe/controllers/authController.php', true);
 
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    xhr.send(params);
+  xhr.send(params);
 }

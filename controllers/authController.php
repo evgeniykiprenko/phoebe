@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['role'] = 'user';
             }
 
-            header('Location: ' . $mainPage);
+            echo 'success';
             exit;
         }
     }

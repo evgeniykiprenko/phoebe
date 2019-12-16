@@ -9,15 +9,16 @@ $mainPage = "/phoebe/public/index.php";
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     header("Location:" . $mainPage);
 } else {
-    //getting user data
     $email = $_POST['email'];
     $password = $_POST['password'];
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
 
-    $registrationPage = "/phoebe/public/templates/registrationPage.php";
-
-    if (isValid($email) && isValid($password) && isValid($firstName) && isValid($lastName) && checkEmailOriginality($email)) {
+    if (isValid($email) && isValid($password) && isValid($firstName) && isValid($lastName)) {
+        if (!checkEmailOriginality($email)) {
+            echo 'notOriginalEmail';
+            exit;
+        }
         $addUserSql = "INSERT INTO users (first_name, last_name, email, password)
             VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "', '" . $password . "');";
         runQuery($addUserSql);
@@ -29,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
             $_SESSION['lastName'] = $lastName;
             $_SESSION['email'] = $email;
             $_SESSION['role'] = 'user';
-            header("Location:" . $mainPage);
+            echo 'success';
+            exit;
         }
-    } else {
-        header("Location:" . $registrationPage . "?notOriginalEmail=true");
     }
 }
+echo 'invalidData';

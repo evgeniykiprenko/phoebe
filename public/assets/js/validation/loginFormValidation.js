@@ -45,33 +45,6 @@ function valdiatePassword() {
   return true;
 }
 
-// function isOriginalEmail(email) {
-//   return new Promise((resolve, reject) => {
-//     let xhr = new XMLHttpRequest();
-
-//     xhr.open("POST", '/phoebe/controllers/emailOriginalityCheckController.php', true);
-
-//     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-//     xhr.onload = () => {
-//       if (xhr.status == 200) {
-//         if (xhr.responseText === 'true') {
-//           resolve();
-//         }
-//         reject()
-//       }
-//     }
-
-//     xhr.send('email=' + email);
-//   });
-// }
-
-//At least 8 characters, 1 digit and 1 uppercase letter.
-// function isValidPassword(password) {
-//   let re = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-//   return re.test(password);
-// }
-
 function signIn() {
   let email = document.getElementById("login").value;
   let password = document.getElementById("pwd").value;

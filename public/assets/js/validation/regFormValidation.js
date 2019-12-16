@@ -8,20 +8,22 @@ function validateAndSignUp() {
 function validateRegLogin() {
 
     let emailField = document.getElementById("reg-login");
-    let email = emailField.value;
+    let usersEmail = emailField.value;
     let hint = document.getElementById("reg-login-hint");
 
     hint.innerText = "";
 
-    function isValidEmail(email) {
+    const originalEmailUrl = '/phoebe/controllers/emailOriginalityCheckController.php';
+
+    function isValidEmail(usersEmail) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
+        return re.test(usersEmail);
     }
 
-    if (!email) {
+    if (!usersEmail) {
         hint.innerText = "Enter youre email.";
         return;
-    } else if (!isValidEmail(email)) {
+    } else if (!isValidEmail(usersEmail)) {
         hint.innerText = "Provide a valid email address.";
         return;
     }
@@ -39,6 +41,9 @@ function valdiateRegPassword() {
 
     if (!password) {
         hint.innerText = 'Enter your password.';
+        return;
+    } else if (!isValidPassword(password)) {
+        hint.innerText = 'At least 8 characters, 1 digit and 1 uppercase letter.';
         return;
     }
 
@@ -82,31 +87,45 @@ function validateLastName() {
 }
 
 // function isOriginalEmail(email) {
-//   return new Promise((resolve, reject) => {
+//     let email = document.getElementById("reg-login").value;
+
 //     let xhr = new XMLHttpRequest();
+
+//     var params = 'email=' + email;
+
+//     xhr.onload = () => {
+//         if (xhr.status == 200) {
+//             let response = xhr.responseText;
+//             if (response === 'original') {
+//                 return true
+//             }
+//         }
+//     }
 
 //     xhr.open("POST", '/phoebe/controllers/emailOriginalityCheckController.php', true);
 
 //     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-//     xhr.onload = () => {
-//       if (xhr.status == 200) {
-//         if (xhr.responseText === 'true') {
-//           resolve();
-//         }
-//         reject()
-//       }
-//     }
-
-//     xhr.send('email=' + email);
-//   });
+//     xhr.send(params);
 // }
 
+function sendRequest(method, url, body = null) {
+    const headers = {
+        'Content-Type': 'application/json'
+    };
+    return fetch(url, {
+        method: method,
+        body: JSON.stringify(body),
+        headers: headers
+    }).then(response => {
+        return response.json()
+    })
+}
 //At least 8 characters, 1 digit and 1 uppercase letter.
-// function isValidPassword(password) {
-//   let re = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-//   return re.test(password);
-// }
+function isValidPassword(password) {
+    let re = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    return re.test(password);
+}
 
 function signUp() {
     let email = document.getElementById("reg-login").value;
@@ -124,7 +143,7 @@ function signUp() {
             if (response === 'invalidData') {
                 let hint = document.getElementById('reg-pwd-hint');
                 hint.innerText = 'There is an error, please, try again, please:)';
-            } else if (response === 'notOriginalEmail') { success
+            } else if (response === 'notOriginalEmail') {
                 let hint = document.getElementById('reg-pwd-hint');
                 hint.innerText = 'Youre email is already in use. Login using it.';
             } else if (response === 'success') {

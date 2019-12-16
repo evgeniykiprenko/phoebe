@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "SELECT id FROM users WHERE email = '" . $email . "';";
 
     if (runQuery($sql)->num_rows == 0) {
-        echo 'true';    
+        echo 'original';    
     } else {
-        echo 'false';
+        echo 'notOriginal';
     }
 }

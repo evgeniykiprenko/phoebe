@@ -17,6 +17,8 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="/phoebe/public/assets/js/ajax/showUsersList.js"></script>
     <script src="/phoebe/public/assets/js/validation/loginFormValidation.js"></script>
+    <script src="/phoebe/public/assets/js/validation/regFormValidation.js"></script>
+
     <title>Phoebe</title>
 </head>
 
@@ -30,13 +32,13 @@ session_start();
         if (empty($_SESSION['email'])) {
             echo '<div class="text-right">
                 <span>
-                    <button type="button" class="btn btn-success nav-button" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-success nav-button" data-toggle="modal" data-target="#loginModal">
                         Sign in
                     </button>
                 </span>
                 <span>
-                    <button type="button" class="btn btn-info nav-button">
-                        <a href="/phoebe/public/templates/registrationPage.php" class="text-white">Sign up</a>
+                    <button type="button" class="btn btn-info nav-button" data-toggle="modal" data-target="#regModal">
+                        Sign up
                     </button>
                 </span>
             </div>';
@@ -62,8 +64,8 @@ session_start();
 
     <div class="container">
 
-        <!-- The Modal -->
-        <div class="modal" id="myModal">
+        <!-- login -->
+        <div class="modal" id="loginModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
 
@@ -89,6 +91,50 @@ session_start();
                                 </div>
                                 <div id="pwd-hint" class="hint field"></div>
                                 <button type="button" id="login-button" class="btn btn-success" onclick="validateAndSignIn()">Sign In</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- registration -->
+        <div class="modal" id="regModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Sign in</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <!-- <form action="/phoebe/controllers/authController.php" method="post"> -->
+                        <form>
+                            <div id="login-form">
+                            <div class="field">
+                                    <label for="first_name">First name:</label>
+                                    <input type="text" id="first_name" name="first_name">
+                                </div>
+                                <div id="reg-first-name-hint" class="hint field"></div>
+                                <div class="field">
+                                    <label for="last_name">Last name:</label>
+                                    <input type="text" id="last_name" name="last_name">
+                                </div>
+                                <div id="reg-last-name-hint" class="hint field"></div>
+                                <div class="field">
+                                    <label for="email">Email address:</label>
+                                    <input type="text" id="reg-login" name="email">
+                                </div>
+                                <div id="reg-login-hint" class="hint field"></div>
+                                <div class="field">
+                                    <label for="pwd">Password:</label>
+                                    <input type="password" id="reg-pwd" name="password">
+                                </div>
+                                <div id="reg-pwd-hint" class="hint field"></div>
+                                <button type="button" id="login-button" class="btn btn-success" onclick="validateAndSignUp()">Sign In</button>
                             </div>
                         </form>
                     </div>

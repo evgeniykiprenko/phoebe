@@ -134,7 +134,7 @@ session_start();
                                     <input type="password" id="reg-pwd" name="password">
                                 </div>
                                 <div id="reg-pwd-hint" class="hint field"></div>
-                                <button type="button" id="login-button" class="btn btn-success" onclick="validateAndSignUp()">Sign In</button>
+                                <button type="button" id="reg-button" class="btn btn-success" onclick="validateAndSignUp()">Sign In</button>
                             </div>
                         </form>
                     </div>

@@ -1,11 +1,11 @@
 function validateAndSignUp() {
-    if (validateFirstName() && validateLastName() && validateLogin() && valdiatePassword()) {
+    if (validateFirstName() && validateLastName() && validateRegLogin() && valdiateRegPassword()) {
         signUp();
     }
 }
 
 
-function validateLogin() {
+function validateRegLogin() {
 
     let emailField = document.getElementById("reg-login");
     let email = emailField.value;
@@ -29,7 +29,7 @@ function validateLogin() {
     return true;
 }
 
-function valdiatePassword() {
+function valdiateRegPassword() {
     let passwordField = document.getElementById("reg-pwd");
     let password = passwordField.value;
     let hint = document.getElementById('reg-pwd-hint');

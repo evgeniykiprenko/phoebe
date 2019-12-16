@@ -71,3 +71,27 @@ function valdiatePassword() {
   //   let re = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
   //   return re.test(password);
   // }
+
+  function signIn() {
+    let email = document.getElementById("login").value;
+    let password = document.getElementById("pwd").value;
+
+    let xhr = new XMLHttpRequest();
+
+    var params = 'email=' + email + '&password=' + password;
+
+    xhr.onload = () => {
+            if (xhr.status == 200 && xhr.responseText === 'incorrect') {
+              let hint = document.getElementById('pwd-hint');
+              hint.innerText = 'Incorrect login or password.';  
+            } else {
+              window.location.reload(true);
+            }
+          }
+
+    xhr.open("POST", '/phoebe/controllers/authController.php', true);
+
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.send(params);
+}

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/phoebe/controllers/utils/dbUtils.php";
-include $_SERVER['DOCUMENT_ROOT']."/phoebe/controllers/utils/validationUtils.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/phoebe/controllers/utils/dbUtils.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/phoebe/controllers/utils/validationUtils.php";
 
 $id = $_GET['id'];
 $sql = "SELECT first_name, last_name, email, password, photo FROM users WHERE id = $id;";
@@ -16,43 +16,47 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="/phoebe/public/assets/css/main.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="/phoebe/public/assets/js/validation/loginFormValidation.js"></script>
+    <script src="/phoebe/public/assets/js/validation/regFormValidation.js"></script>
+
     <title>Document</title>
 </head>
+
 <body>
-<nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="/phoebe/public/index.php">
-        <img src="/phoebe/public/assets/img/logo.png" width="135" height="50" alt="Phoebe">
-    </a>
-    <?php
-    if (empty($_SESSION['email'])) {
-        echo '<div class="text-right">
+    <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="/phoebe/public/index.php">
+            <img src="/phoebe/public/assets/img/logo.png" width="135" height="50" alt="Phoebe">
+        </a>
+        <?php
+        if (empty($_SESSION['email'])) {
+            echo '<div class="text-right">
                 <span>
-                    <button type="button" class="btn btn-success nav-button" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-success nav-button" data-toggle="modal" data-target="#loginModal">
                         Sign in
                     </button>
                 </span>
                 <span>
-                    <button type="button" class="btn btn-info nav-button">
-                        <a href="registrationPage.php" class="text-white">Sign up</a>
+                    <button type="button" class="btn btn-info nav-button" data-toggle="modal" data-target="#regModal">
+                        Sign up
                     </button>
                 </span>
             </div>';
-    } else {
-        echo '<div class="text-right">
+        } else {
+            echo '<div class="text-right">
         <span>
             <button type="button" class="btn btn-info nav-button">
                 <a href="/phoebe/public/index.php" class="text-white">Main page</a>
@@ -64,44 +68,94 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
             </button>
         </span>
     </div>';
-    }
-    ?>
-</nav>
+        }
+        ?>
+    </nav>
 
-<!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+    <!-- The Modal -->
+    <!-- login -->
+    <div class="modal" id="loginModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Sign in</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign in</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="/phoebe/controllers/authController.php" method="post">
-                    <div class="form-group">
-                        <label for="email">Email address:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" id="pwd" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <!-- <form action="/phoebe/controllers/authController.php" method="post"> -->
+                    <form>
+                        <div id="login-form">
+                            <div class="field">
+                                <label for="email">Email address:</label>
+                                <input type="text" id="login" name="email">
+                            </div>
+                            <div id="login-hint" class="hint field"></div>
+                            <div class="field">
+                                <label for="pwd">Password:</label>
+                                <input type="password" id="pwd" name="password">
+                            </div>
+                            <div id="pwd-hint" class="hint field"></div>
+                            <button type="button" id="login-button" class="btn btn-success" onclick="validateAndSignIn()">Sign In</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <?php
-    if ($_SESSION['id'] == $id || $_SESSION['role'] == 'admin') {
-        if ($show) {
-            echo '<div class="row mx-md-n5">
+    <!-- registration -->
+    <div class="modal" id="regModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign in</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <!-- <form action="/phoebe/controllers/authController.php" method="post"> -->
+                    <form>
+                        <div id="login-form">
+                            <div class="field">
+                                <label for="first_name">First name:</label>
+                                <input type="text" id="first_name" name="first_name">
+                            </div>
+                            <div id="reg-first-name-hint" class="hint field"></div>
+                            <div class="field">
+                                <label for="last_name">Last name:</label>
+                                <input type="text" id="last_name" name="last_name">
+                            </div>
+                            <div id="reg-last-name-hint" class="hint field"></div>
+                            <div class="field">
+                                <label for="email">Email address:</label>
+                                <input type="text" id="reg-login" name="email">
+                            </div>
+                            <div id="reg-login-hint" class="hint field"></div>
+                            <div class="field">
+                                <label for="pwd">Password:</label>
+                                <input type="password" id="reg-pwd" name="password">
+                            </div>
+                            <div id="reg-pwd-hint" class="hint field"></div>
+                            <button type="button" id="reg-button" class="btn btn-info" onclick="validateAndSignUp()">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <?php
+        if ($_SESSION['id'] == $id || $_SESSION['role'] == 'admin') {
+            if ($show) {
+                echo '<div class="row mx-md-n5">
         <div class="col px-md-5">
             <div>
                 <img src="' . $linkToPhoto . '" alt="Profile photo" id="usersImage">
@@ -147,14 +201,14 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                    </div>
                   
                 </form>';
-        } else {
-            echo "<div><p>Oops, can't get the data:(</p><a href='/phoebe/public/index.php'>Main page</a></div>";
-        }
-        echo '</div>
+            } else {
+                echo "<div><p>Oops, can't get the data:(</p><a href='/phoebe/public/index.php'>Main page</a></div>";
+            }
+            echo '</div>
     </div>';
-    } else {
-        if ($show) {
-            echo '<div class="row mx-md-n5">
+        } else {
+            if ($show) {
+                echo '<div class="row mx-md-n5">
         <div class="col px-md-5">
             <div>
                 <img src="' . $linkToPhoto . '" alt="Profile photo" id="usersImage">
@@ -175,14 +229,15 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                       <input type="text" readonly class="form-control form-control-lg" id="staticEmail" value="' . $row['email'] . '">
                   </div>
                 </form>';
-        } else {
-            echo "<div><p>Oops, can't get the data:(</p><a href='/phoebe/public/index.php'>Main page</a></div>";;
-        }
-        echo '</div>
+            } else {
+                echo "<div><p>Oops, can't get the data:(</p><a href='/phoebe/public/index.php'>Main page</a></div>";;
+            }
+            echo '</div>
     </div>';
-    }
-    ?>
+        }
+        ?>
 
-</div>
+    </div>
 </body>
+
 </html>

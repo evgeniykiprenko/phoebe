@@ -54,7 +54,7 @@ session_start();
                 </span>
                 <span>
                     <button type="button" class="btn btn-danger logout-button">
-                        <a href="/controllers/logoutController.php" class="text-white">Logout</a>   
+                        <a href="/UI-Controllers/logoutController.php" class="text-white">Logout</a>   
                     </button>
                 </span>
             </div>';
@@ -77,7 +77,6 @@ session_start();
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <!-- <form action="/controllers/authController.php" method="post"> -->
                         <form>
                             <div id="login-form">
                                 <div class="field">
@@ -111,7 +110,6 @@ session_start();
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <!-- <form action="/controllers/authController.php" method="post"> -->
                         <form>
                             <div id="login-form">
                             <div class="field">

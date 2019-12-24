@@ -13,7 +13,7 @@ function validateRegLogin() {
 
     hint.innerText = "";
 
-    const originalEmailUrl = '/controllers/emailOriginalityCheckController.php';
+    const originalEmailUrl = '/UI-Controllers/emailOriginalityCheckController.php';
 
     function isValidEmail(usersEmail) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -86,29 +86,6 @@ function validateLastName() {
     return true;
 }
 
-// function isOriginalEmail(email) {
-//     let email = document.getElementById("reg-login").value;
-
-//     let xhr = new XMLHttpRequest();
-
-//     var params = 'email=' + email;
-
-//     xhr.onload = () => {
-//         if (xhr.status == 200) {
-//             let response = xhr.responseText;
-//             if (response === 'original') {
-//                 return true
-//             }
-//         }
-//     }
-
-//     xhr.open("POST", '/controllers/emailOriginalityCheckController.php', true);
-
-//     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-//     xhr.send(params);
-// }
-
 function sendRequest(method, url, body = null) {
     const headers = {
         'Content-Type': 'application/json'
@@ -152,7 +129,7 @@ function signUp() {
         }
     }
 
-    xhr.open("POST", '/controllers/registrationController.php', true);
+    xhr.open("POST", '/UI-Controllers/registrationController.php', true);
 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 

@@ -50,7 +50,7 @@ class Route
                 //   $controller = new RoleController($this->method,$this->requestParams);
                 break;
             default:
-                $controller = new UserController($this->method, $this->requestParams);
+                echo 'There is no API mapped on domain/api. The full list of supported URLs you can see bellow:';
         }
 
         //Если метод(действие) определен в дочернем классе API

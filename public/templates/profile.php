@@ -1,7 +1,7 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . "/controllers/utils/dbUtils.php";
-include $_SERVER['DOCUMENT_ROOT'] . "/controllers/utils/validationUtils.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/UI-Controllers/utils/dbUtils.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/UI-Controllers/utils/validationUtils.php";
 
 $id = $_GET['id'];
 $sql = "SELECT first_name, last_name, email, password, photo FROM users WHERE id = $id;";
@@ -64,7 +64,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
         </span>
         <span>
             <button type="button" class="btn btn-danger logout-button">
-                <a href="/controllers/logoutController.php" class="text-white">Logout</a>
+                <a href="/UI-Controllers/logoutController.php" class="text-white">Logout</a>
             </button>
         </span>
     </div>';
@@ -86,7 +86,6 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <!-- <form action="/controllers/authController.php" method="post"> -->
                     <form>
                         <div id="login-form">
                             <div class="field">
@@ -120,7 +119,6 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <!-- <form action="/controllers/authController.php" method="post"> -->
                     <form>
                         <div id="login-form">
                             <div class="field">

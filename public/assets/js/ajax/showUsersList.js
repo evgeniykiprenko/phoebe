@@ -73,7 +73,7 @@ function formatUsersTable(output, users) {
     let id = users[user].id;
     output +=
       "<tbody><tr>" +
-      '<td><a href="templates/profile.php?id=' +
+      '<td><a href="/public/templates/profile.php?id=' +
       id +
       '">' +
       id +

@@ -4,7 +4,7 @@ include "utils/dbUtils.php";
 session_start();
 
 $id = $_GET['id'];
-$mainPage = '/public/index.php';
+$mainPage = '/index.php';
 $sql = "DELETE FROM users WHERE id = $id;";
 
 if ($_SESSION['id'] == $id) {

@@ -38,7 +38,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
 
 <body>
     <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="/public/index.php">
+        <a class="navbar-brand" href="/index.php">
             <img src="/public/assets/img/logo.png" width="135" height="50" alt="Phoebe">
         </a>
         <?php
@@ -59,7 +59,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
             echo '<div class="text-right">
         <span>
             <button type="button" class="btn btn-info nav-button">
-                <a href="/public/index.php" class="text-white">Main page</a>
+                <a href="/index.php" class="text-white">Main page</a>
             </button>
         </span>
         <span>
@@ -180,7 +180,7 @@ if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
                 </button>';
                 
         } else {
-            echo "<div><p>Oops, can't get the data:(</p><a href='/public/index.php'>Main page</a></div>";
+            echo "<div><p>Oops, can't get the data:(</p><a href='/index.php'>Main page</a></div>";
         }
         echo '</div>
         </div>';

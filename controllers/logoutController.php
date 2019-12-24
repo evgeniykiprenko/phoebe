@@ -1,5 +1,5 @@
 <?php
-$mainPage = '/public/index.php';
+$mainPage = '/index.php';
 session_start();
 
 session_unset();

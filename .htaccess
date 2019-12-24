@@ -1,0 +1,14 @@
+Options +FollowSymLinks
+IndexIgnore */* #Options -Indexes
+
+#Redirect URL domain/api/table-name to api-index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/(.*)$ /api-index.php
+
+#Redirect URL domain/api to api-index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api /api-index.php

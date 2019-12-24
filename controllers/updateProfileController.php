@@ -4,7 +4,7 @@ include 'utils/dbUtils.php';
 
 session_start();
 
-$profilePage = "/phoebe/public/templates/profile.php";
+$profilePage = "/public/templates/profile.php";
 
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     header("Location: $profilePage?id=$id");

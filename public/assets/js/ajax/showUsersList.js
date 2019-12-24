@@ -8,9 +8,9 @@ function showUsers(sortBy) {
   let xhr = new XMLHttpRequest();
   let url;
   if (sortBy == undefined || typeof sortBy != "string") {
-    url = "/phoebe/controllers/showAllUsersController.php";      
+    url = "/controllers/showAllUsersController.php";      
   } else {
-    url = "/phoebe/controllers/showAllUsersController.php/?sortBy" + sortBy + "=true";
+    url = "/controllers/showAllUsersController.php/?sortBy" + sortBy + "=true";
   }
 
   xhr.open(

@@ -65,7 +65,7 @@ function signIn() {
     }
   }
 
-  xhr.open("POST", '/phoebe/controllers/authController.php', true);
+  xhr.open("POST", '/controllers/authController.php', true);
 
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 

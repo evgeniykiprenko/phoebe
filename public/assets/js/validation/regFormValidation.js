@@ -13,7 +13,7 @@ function validateRegLogin() {
 
     hint.innerText = "";
 
-    const originalEmailUrl = '/phoebe/controllers/emailOriginalityCheckController.php';
+    const originalEmailUrl = '/controllers/emailOriginalityCheckController.php';
 
     function isValidEmail(usersEmail) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -102,7 +102,7 @@ function validateLastName() {
 //         }
 //     }
 
-//     xhr.open("POST", '/phoebe/controllers/emailOriginalityCheckController.php', true);
+//     xhr.open("POST", '/controllers/emailOriginalityCheckController.php', true);
 
 //     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
@@ -152,7 +152,7 @@ function signUp() {
         }
     }
 
-    xhr.open("POST", '/phoebe/controllers/registrationController.php', true);
+    xhr.open("POST", '/controllers/registrationController.php', true);
 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 

@@ -4,7 +4,7 @@ include 'utils/validationUtils.php';
 
 session_start();
 
-$mainPage = "/phoebe/public/index.php";
+$mainPage = "/public/index.php";
 
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     header("Location:" . $mainPage);

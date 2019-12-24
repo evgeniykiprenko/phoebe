@@ -15,9 +15,9 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="/phoebe/public/assets/js/ajax/showUsersList.js"></script>
-    <script src="/phoebe/public/assets/js/validation/loginFormValidation.js"></script>
-    <script src="/phoebe/public/assets/js/validation/regFormValidation.js"></script>
+    <script src="/public/assets/js/ajax/showUsersList.js"></script>
+    <script src="/public/assets/js/validation/loginFormValidation.js"></script>
+    <script src="/public/assets/js/validation/regFormValidation.js"></script>
 
     <title>Phoebe</title>
 </head>
@@ -25,7 +25,7 @@ session_start();
 <body>
     <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
         <a class="navbar-brand" href="index.php">
-            <img src="/phoebe/public/assets/img/logo.png" width="135" height="50" alt="Phoebe">
+            <img src="/public/assets/img/logo.png" width="135" height="50" alt="Phoebe">
         </a>
 
         <?php
@@ -49,12 +49,12 @@ session_start();
                 </span>
                 <span>
                     <button type="button" class="btn btn-info nav-button">
-                        <a href="/phoebe/public/templates/profile.php?id=' . $_SESSION['id'] . '" class="text-white">Profile</a>
+                        <a href="/public/templates/profile.php?id=' . $_SESSION['id'] . '" class="text-white">Profile</a>
                     </button>
                 </span>
                 <span>
                     <button type="button" class="btn btn-danger logout-button">
-                        <a href="/phoebe/controllers/logoutController.php" class="text-white">Logout</a>   
+                        <a href="/controllers/logoutController.php" class="text-white">Logout</a>   
                     </button>
                 </span>
             </div>';
@@ -77,7 +77,7 @@ session_start();
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <!-- <form action="/phoebe/controllers/authController.php" method="post"> -->
+                        <!-- <form action="/controllers/authController.php" method="post"> -->
                         <form>
                             <div id="login-form">
                                 <div class="field">
@@ -111,7 +111,7 @@ session_start();
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <!-- <form action="/phoebe/controllers/authController.php" method="post"> -->
+                        <!-- <form action="/controllers/authController.php" method="post"> -->
                         <form>
                             <div id="login-form">
                             <div class="field">

@@ -1,12 +1,11 @@
 <?php
 
 require_once './app/Controllers/UserController.php';
-require_once './app/Controllers/RoleController.php';
 
 class Route
 {
 
-    protected $method = ''; //GET|POST|PUT|DELETE
+    protected $method = '';
 
     public $requestUri = [];
     public $requestParams = [];
@@ -17,7 +16,6 @@ class Route
         header("Access-Control-Allow-Methods: *");
         header("Content-Type: application/json");
 
-        //Массив GET параметров разделенных слешем
         $this->requestUri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
         if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
             $input = file_get_contents('php://input');
@@ -26,8 +24,6 @@ class Route
             $this->requestParams = $_REQUEST;
         }
 
-
-        //Определение метода запроса
         $this->method = $_SERVER['REQUEST_METHOD'];
         if ($this->method == 'POST' && array_key_exists('HTTP_X_HTTP_METHOD', $_SERVER)) {
             if ($_SERVER['HTTP_X_HTTP_METHOD'] == 'DELETE') {
@@ -42,24 +38,22 @@ class Route
 
     public function run()
     {
-        //Первые 2 элемента массива URI должны быть "api" и название таблицы
         if (array_shift($this->requestUri) !== 'api') {
             throw new RuntimeException('API Not Found', 403);
         }
 
         $request = array_shift($this->requestUri);
-        switch ($request) {
-            case 'users':
-                $controller = new UserController($this->method, $this->requestParams, $this->requestUri);
-                break;
-            case 'roles':
-                //   $controller = new RoleController($this->method,$this->requestParams);
-                break;
-            default:
-                echo 'There is no API mapped on domain/api. The full list of supported URLs you can see bellow:';
+        if ($request == 'users') {
+            $controller = new UserController($this->method, $this->requestParams, $this->requestUri);
+        } else {
+            return 'There is no API mapped on requested link. The full list of supported URLs you can see bellow:
+                - GET localhost/api/users to get all users list;
+                - GET localhost/api/users/13 to get specific user by id;
+                - POST localhost/api/users to create new user (you need to pass firstname, lastName, email and password fields at the request body);
+                - PUT localhost/api/users/15 to update specific users information. Its important to pass all the fields: firstname, lastName, email and password. And body type must be **x-www-form-urlencoded**;
+                - DELETE localhost/api/users/39 to delete specific user using his ID';
         }
 
-        //Если метод(действие) определен в дочернем классе API
         if (method_exists($controller, $controller->getAction($this->requestUri))) {
             return $controller->{$controller->getAction($this->requestUri)}();
         } else {

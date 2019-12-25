@@ -12,9 +12,8 @@ class UserController extends AbstractController
     public $apiName = 'users';
 
     /**
-     * Метод GET
-     * Вывод списка всех записей
-     * http://ДОМЕН/users
+     * Method GET
+     * http://domain/users
      * @return string
      */
     public function index()
@@ -27,9 +26,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * Метод GET
-     * Просмотр отдельной записи (по id)
-     * http://ДОМЕН/users/1
+     * Method GET
+     * http://domain/users/1
      * @return string
      */
     public function view()
@@ -46,9 +44,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * Метод POST
-     * Создание новой записи
-     * http://ДОМЕН/users + параметры запроса name, email
+     * Method POST
+     * http://domain/users + user's parameter passed in body
      * @return string
      */
     public function create()
@@ -71,9 +68,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * Метод PUT
-     * Обновление отдельной записи (по ее id)
-     * http://ДОМЕН/users/1
+     * Method PUT
+     * http://domain/users/1
      * @return string
      */
     public function update()
@@ -100,9 +96,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * Метод DELETE
-     * Удаление отдельной записи (по ее id)
-     * http://ДОМЕН/users/1
+     * Method DELETE
+     * http://doman/users/1
      * @return string
      */
     public function delete()

@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "e9e94a51-143a-4489-966e-022e30677956",
+		"name": "Web-development LAB-3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/users",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/users/13",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstName",
+							"value": "Timofey",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Gnida",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Password1",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "gnidaaaaa@gmail.com",
+							"description": "Email must be original",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/users",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update existing user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "firstName",
+							"value": "Toni",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Goo",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "dabidGoo@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Password1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/users/15",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/users/39",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users",
+						"39"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

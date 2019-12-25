@@ -6,8 +6,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once './app/Database/Database.php';
+require_once './mail/Mail.php';
 
 use app\Database\Database as Database;
+use mail\Mail as Mail;
 
 class Users
 {
@@ -21,13 +23,6 @@ class Users
     public static function getAll()
     {
         $result = Database::runQuery(self::$getAllSql);
-        $to = '<zhenyakiprenko@gmail.com>';
-        $subject = 'Welcome to Phoebe!';
-        $message = 'We are very welcome you!';
-        $headers  = "Content-type: text/html; charset=windows-1251 \r\n";
-        $headers .= "From: <evgexaxv@gmail.com>\r\n";
-        $headers .= "Reply-To: evgexaxv@gmail.com\r\n";
-        mail($to, $subject, $message, $headers);
         return mysqli_num_rows($result) == 0 ? null : $result;
     }
 
@@ -43,6 +38,7 @@ class Users
         $getId = "SELECT id FROM users WHERE email = '$email';";
         $result = Database::runQuery($getId);
         if ($result->num_rows > 0 && $row = $result->fetch_assoc()) {
+            Mail::sendWelcomeEmail($email, $firstName, $lastName);
             return $row['id'];
         }
         return null;

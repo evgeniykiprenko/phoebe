@@ -30,4 +30,9 @@ class Database
         mysqli_close($conn);
         return $result;
     }
+
+    public static function checkEmailOriginality($email) {
+        $sql = "SELECT id FROM users WHERE email = '$email';";
+        return self::runQuery($sql)->num_rows == 0;
+    }
 }

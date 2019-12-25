@@ -1,8 +1,9 @@
 Options +FollowSymLinks
 IndexIgnore */* #Options -Indexes
 
-RewriteCond %{REQUEST_URI} ^/$
-RewriteRule ^(.*)$ /api/$1 [R=301]
+#Redirect domain to domain/api (disabled, cause i need both UI and api)
+#RewriteCond %{REQUEST_URI} ^/$
+#RewriteRule ^(.*)$ /api/$1 [R=301]
 
 #Redirect URL domain/api/table-name to api-index.php
 RewriteEngine On

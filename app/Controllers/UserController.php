@@ -53,19 +53,21 @@ class UserController extends AbstractController
      */
     public function create()
     {
-        //$name = $this->requestParams['name'] ?? '';
-        //$email = $this->requestParams['email'] ?? '';
-        //if($name && $email){
-        //    $db = (new Db())->getConnect();
-        //    $user = new Users($db, [
-        //        'name' => $name,
-        //        'email' => $email
-        //    ]);
-        //    if($user = $user->saveNew()){
-        //        return $this->response('Data saved.', 200);
-        //    }
-        //}
-        //return $this->response("Saving error", 500);
+        $firstName = $this->requestParams['firstName'] ?? '';
+        $lastName = $this->requestParams['lastName'] ?? '';
+        $email = $this->requestParams['email'] ?? '';
+        $password = $this->requestParams['password'] ?? '';
+
+        if ($firstName && $lastName && $password && $email) {
+            if (!Database::checkEmailOriginality($email)) {
+                return $this->response("Given email is already in use", 500);    
+            }
+
+            if ($id = Users::save($firstName, $lastName, $email, $password)) {
+                return $this->response(json_encode(['id' => $id]), 200);
+            }
+        }
+        return $this->response("Saving error", 500);
     }
 
     /**

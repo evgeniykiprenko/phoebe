@@ -1,5 +1,7 @@
 <?php
 
+namespace app\Database;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -12,7 +14,7 @@ class Database
 
     public static function getConnection()
     {
-        return new mysqli(self::$servername, self::$dbUser, self::$dbPassword, self::$database);
+        return new \mysqli(self::$servername, self::$dbUser, self::$dbPassword, self::$database);
     }
 
     public static function closeConnection($conn)
@@ -22,7 +24,7 @@ class Database
 
     public static function runQuery($sql)
     {
-        $conn = new mysqli(self::$servername, self::$dbUser, self::$dbPassword, self::$database);
+        $conn = new \mysqli(self::$servername, self::$dbUser, self::$dbPassword, self::$database);
         if ($conn->connect_error) {
             return null;
         }

@@ -1,9 +1,13 @@
 <?php
 
+namespace app\Models;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once './app/Database/Database.php';
+
+use app\Database\Database as Database;
 
 class Users
 {

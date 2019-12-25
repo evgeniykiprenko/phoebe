@@ -1,6 +1,7 @@
 <?php
 
 require_once './app/Controllers/UserController.php';
+use app\Controllers\UserController as UserController;
 
 class Route
 {

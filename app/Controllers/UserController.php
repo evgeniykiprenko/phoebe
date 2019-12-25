@@ -1,11 +1,17 @@
 <?php
+
+namespace app\Controllers;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
 
 require_once 'AbstractController.php';
 require_once './app/Database/Database.php';
 require_once './app/Models/Users.php';
+
+use app\Controllers\AbstractController as AbstractController;
+use app\Database\Database as Database;
+use app\Models\Users as Users;
 
 class UserController extends AbstractController
 {

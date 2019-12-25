@@ -1,4 +1,6 @@
 <?php
+namespace app\Controllers;
+
 abstract class AbstractController
 {
     public $apiName = '';

@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
             $_SESSION['email'] = $email;
             $_SESSION['role'] = 'user';
             echo 'success';
+            mail($email, 'Phoebe', 'Welcome to Phoebe, dude!');
             exit;
         }
     }

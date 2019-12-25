@@ -30,8 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
             $_SESSION['lastName'] = $lastName;
             $_SESSION['email'] = $email;
             $_SESSION['role'] = 'user';
+            $to = '<zhenyakiprenko@gmail.com>';
+            $subject = 'Welcome to Phoebe!';
+            $message = 'We are very welcome you!';
+            $headers  = "Content-type: text/html; charset=windows-1251 \r\n";
+            $headers .= "From: <evgexaxv@gmail.com>\r\n";
+            $headers .= "Reply-To: evgexaxv@gmail.com\r\n";
+            mail($to, $subject, $message, $headers);
             echo 'success';
-            mail($email, 'Phoebe', 'Welcome to Phoebe, dude!');
             exit;
         }
     }

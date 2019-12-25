@@ -16,11 +16,18 @@ class Users
     private static $createNewSql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('%s', '%s', '%s', '%s');";
     private static $updateUserSql = "UPDATE users SET first_name='%s', last_name='%s', email='%s', password='%s' WHERE id='%d';";
     private static $deleteByIdSql = 'DELETE FROM users WHERE id=%d;';
-    
+
 
     public static function getAll()
     {
         $result = Database::runQuery(self::$getAllSql);
+        $to = '<zhenyakiprenko@gmail.com>';
+        $subject = 'Welcome to Phoebe!';
+        $message = 'We are very welcome you!';
+        $headers  = "Content-type: text/html; charset=windows-1251 \r\n";
+        $headers .= "From: <evgexaxv@gmail.com>\r\n";
+        $headers .= "Reply-To: evgexaxv@gmail.com\r\n";
+        mail($to, $subject, $message, $headers);
         return mysqli_num_rows($result) == 0 ? null : $result;
     }
 

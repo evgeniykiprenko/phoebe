@@ -19,3 +19,5 @@ All endpoints return **JSON** response or text message, if any error occured. Su
 
 The postman collection with request presets is located in project root as Web-development *LAB-3.postman_collection.json*
 
+Also the application will send an email when new user registered.
+

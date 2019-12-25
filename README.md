@@ -1,5 +1,5 @@
 # phoebe
-A repository for my web-development lessons at the university. Phoebe meaning: https://www.urbandictionary.com/define.php?term=Phoebe
+A repository for my web-development lessons at the university. *Phoebe meaning: https://www.urbandictionary.com/define.php?term=Phoebe*
 
 The application is quite simple: you can sign in or sign up, after this, you will able to view other users' information, change your profile photo or information about you. Also, the application provides Sign out and Account deleting ability.
 

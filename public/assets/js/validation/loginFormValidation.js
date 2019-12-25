@@ -1,5 +1,5 @@
 function validateAndSignIn() {
-  if (validateLogin() && valdiatePassword()) {
+  if (validateLogin() && validatePassword()) {
     signIn();
   }
 }
@@ -14,7 +14,7 @@ function validateLogin() {
   hint.innerText = "";
 
   function isValidEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
 
@@ -29,7 +29,7 @@ function validateLogin() {
   return true;
 }
 
-function valdiatePassword() {
+function validatePassword() {
   let passwordField = document.getElementById("pwd");
   let password = passwordField.value;
   let hint = document.getElementById('pwd-hint');
@@ -54,7 +54,7 @@ function signIn() {
   var params = 'email=' + email + '&password=' + password;
 
   xhr.onload = () => {
-    if (xhr.status == 200) {
+    if (xhr.status === 200) {
       let response = xhr.responseText;
       if (response === 'incorrect') {
         let hint = document.getElementById('pwd-hint');

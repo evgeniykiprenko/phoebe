@@ -44,7 +44,7 @@ class Route
         $request = array_shift($this->requestUri);
         switch ($request) {
             case 'users':
-                $controller = new UserController($this->method, $this->requestParams);
+                $controller = new UserController($this->method, $this->requestParams, $this->requestUri);
                 break;
             case 'roles':
                 //   $controller = new RoleController($this->method,$this->requestParams);

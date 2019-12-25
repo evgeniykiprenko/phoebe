@@ -10,6 +10,8 @@ class Users
     private static $getAllSql = "SELECT users.id, users.first_name, users.last_name, users.email, users.role_id FROM users;";
     private static $getByIdSql = "SELECT users.id, users.first_name, users.last_name, users.email, users.role_id FROM users WHERE id = %d;";
     private static $createNewSql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('%s', '%s', '%s', '%s');";
+    private static $updateUserSql = "UPDATE users SET first_name='%s', last_name='%s', email='%s', password='%s' WHERE id='%d';";
+    private static $deleteByIdSql = 'DELETE FROM users WHERE id=%d;';
     
 
     public static function getAll()
@@ -33,5 +35,20 @@ class Users
             return $row['id'];
         }
         return null;
+    }
+
+    public static function update($id, $firstName, $lastName, $email, $password)
+    {
+        Database::runQuery(sprintf(self::$updateUserSql, $firstName, $lastName, $email, $password, $id));
+        return Users::getById($id);
+    }
+
+    public static function deleteById($id)
+    {
+        Database::runQuery(sprintf(self::$deleteByIdSql, $id));
+        if (!Users::getById($id)) {
+            return true;
+        }
+        return false;
     }
 }

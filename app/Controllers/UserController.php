@@ -60,7 +60,7 @@ class UserController extends AbstractController
 
         if ($firstName && $lastName && $password && $email) {
             if (!Database::checkEmailOriginality($email)) {
-                return $this->response("Given email is already in use", 500);    
+                return $this->response("Given email is already in use", 500);
             }
 
             if ($id = Users::save($firstName, $lastName, $email, $password)) {
@@ -73,29 +73,28 @@ class UserController extends AbstractController
     /**
      * Метод PUT
      * Обновление отдельной записи (по ее id)
-     * http://ДОМЕН/users/1 + параметры запроса name, email
+     * http://ДОМЕН/users/1
      * @return string
      */
     public function update()
     {
-        //$parse_url = parse_url($this->requestUri[0]);
-        //$userId = $parse_url['path'] ?? null;
-        //
-        //$db = (new Db())->getConnect();
-        //
-        //if(!$userId || !Users::getById($db, $userId)){
-        //    return $this->response("User with id=$userId not found", 404);
-        //}
-        //
-        //$name = $this->requestParams['name'] ?? '';
-        //$email = $this->requestParams['email'] ?? '';
-        //
-        //if($name && $email){
-        //    if($user = Users::update($db, $userId, $name, $email)){
-        //        return $this->response('Data updated.', 200);
-        //    }
-        //}
-        //return $this->response("Update error", 400);
+        return $this->response($this->requestParams, 200);
+        $id = (int) array_shift($this->requestUri);
+        $firstName = $this->requestParams['firstName'] ?? '';
+        $lastName = $this->requestParams['lastName'] ?? '';
+        $email = $this->requestParams['email'] ?? '';
+        $password = $this->requestParams['password'] ?? '';
+
+        if (!$id || !Users::getById($id)) {
+            return $this->response("User with id=$id not found", 404);
+        }
+
+        if ($firstName && $lastName && $password && $email) {
+            if ($user = Users::update($id, $firstName, $lastName, $email, $password)) {
+                return $this->response(json_encode(mysqli_fetch_all($user, MYSQLI_ASSOC)), 200);
+            }
+        }
+        return $this->response("Update error $firstName, $lastName, $email, $password", 500);
     }
 
     /**
@@ -106,17 +105,13 @@ class UserController extends AbstractController
      */
     public function delete()
     {
-        //$parse_url = parse_url($this->requestUri[0]);
-        //$userId = $parse_url['path'] ?? null;
-        //
-        //$db = (new Db())->getConnect();
-        //
-        //if(!$userId || !Users::getById($db, $userId)){
-        //    return $this->response("User with id=$userId not found", 404);
-        //}
-        //if(Users::deleteById($db, $userId)){
-        //    return $this->response('Data deleted.', 200);
-        //}
-        //return $this->response("Delete error", 500);
+        $id = (int) array_shift($this->requestUri);
+        if (!$id || !Users::getById($id)) {
+            return $this->response("User with id=$id not found", 404);
+        }
+        if (Users::deleteById($id)) {
+            return $this->response(json_encode(['id' => $id]), 200);
+        }
+        return $this->response("Delete error", 500);
     }
 }

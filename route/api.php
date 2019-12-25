@@ -20,11 +20,12 @@ class Route
         //Массив GET параметров разделенных слешем
         $this->requestUri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
         if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-            
+            $input = file_get_contents('php://input');
+            parse_str($input, $this->requestParams);
         } else {
             $this->requestParams = $_REQUEST;
         }
-        
+
 
         //Определение метода запроса
         $this->method = $_SERVER['REQUEST_METHOD'];

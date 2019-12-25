@@ -78,7 +78,6 @@ class UserController extends AbstractController
      */
     public function update()
     {
-        return $this->response($this->requestParams, 200);
         $id = (int) array_shift($this->requestUri);
         $firstName = $this->requestParams['firstName'] ?? '';
         $lastName = $this->requestParams['lastName'] ?? '';
@@ -93,8 +92,11 @@ class UserController extends AbstractController
             if ($user = Users::update($id, $firstName, $lastName, $email, $password)) {
                 return $this->response(json_encode(mysqli_fetch_all($user, MYSQLI_ASSOC)), 200);
             }
+        } else {
+            return $this->response("All user's fields must be present", 500);    
         }
-        return $this->response("Update error $firstName, $lastName, $email, $password", 500);
+
+        return $this->response("Update error", 500);
     }
 
     /**

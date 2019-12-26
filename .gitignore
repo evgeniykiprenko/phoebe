@@ -5,6 +5,7 @@ target/*
 *.iml
 *.code-workspace
 launch.json
+.env
 
 # do not forget to change the folder
 public/images/*

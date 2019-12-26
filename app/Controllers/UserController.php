@@ -24,6 +24,7 @@ class UserController extends AbstractController
      */
     public function index()
     {
+        // return $this->response(getenv('DB_NAME'));
         $users = Users::getAll();
         if ($users) {
             return $this->response(json_encode(mysqli_fetch_all($users, MYSQLI_ASSOC)), 200);

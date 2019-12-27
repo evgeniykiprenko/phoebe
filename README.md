@@ -1,7 +1,6 @@
 # phoebe
-A repository for my web-development lessons at the university. *Phoebe meaning: https://www.urbandictionary.com/define.php?term=Phoebe*
 
-In this version of the application, we have both a normal UI and Rest API. And we can use them together.
+In this version of the application, we have both a normal UI (from LAB-2) and Rest API. And we can use them together.
 We just need to set a URL:
 for **UI**: *localhost/*
 for **RestAPI**: *localhost/api/{table name}*
@@ -19,3 +18,4 @@ All endpoints return **JSON** response or text message, if any error occured. Su
 
 The postman collection with request presets is located in project root as Web-development *LAB-3.postman_collection.json*
 
+Links, used to build this version: https://klisl.com/php-api-rest.html

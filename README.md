@@ -1,7 +1,6 @@
 # phoebe
-A repository for my web-development lessons at the university. *Phoebe meaning: https://www.urbandictionary.com/define.php?term=Phoebe*
+In this version of the application almost the same as LAB-3: we have both a normal UI and Rest API, but it has namespaces for PHP classes, .env support and sending email after registration.
 
-In this version of the application, we have both a normal UI and Rest API. And we can use them together.
 We just need to set a URL:
 for **UI**: *localhost/*
 for **RestAPI**: *localhost/api/{table name}*
@@ -20,4 +19,7 @@ All endpoints return **JSON** response or text message, if any error occured. Su
 The postman collection with request presets is located in project root as Web-development *LAB-3.postman_collection.json*
 
 Also the application will send an email when new user registered.
+
+### Note
+In the root of the project located .env_example. It's a template for .env file, clone the repository, change credentials on it and rename to .env.
 

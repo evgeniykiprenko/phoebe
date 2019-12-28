@@ -1,11 +1,11 @@
-# phoebe
-Phoebe it's a simple web application based on PHP, CSS, JS, and HTML mostly. The repository has 4 branches, and each of them stores a different version of Phoebe. 
+# phoebe :purple_heart:
+Phoebe it's a simple web application based on PHP, CSS, JS, and HTML mostly. Also, the project uses MySQL database and Apache HTTP Server. The repository has 4 branches, and each of them stores a different version of Phoebe. 
 *Phoebe meaning: https://www.urbandictionary.com/define.php?term=Phoebe*
 
-## Use cases
+## Use cases :squirrel:
 The application is quite simple: you can sign in or sign up, after this, you will able to view other users' information, change your profile photo or information about you. Also, the application provides Sign out and Account deleting ability.
 
-## Phoebe versions
+## Phoebe versions :pencil:
 Each branch store different version of Phoebe:
 
 - **master** is a simple PHP application (without classes, namespaces and ajax);
@@ -15,10 +15,10 @@ Each branch store different version of Phoebe:
 
 **This is the main README file, that contains the main information about Phoebe. To more detailed information about specific branch (version) check it README**
 
-## Author
+## Author :person_with_blond_hair:
 name: Yevgeniy Kiprenko 
 email: zhenyakiprenko@gmail.com
 telegram: https://t.me/Jus7XV
 
-## Date of finish
+## Date of finish :date:
 27.12.19

@@ -17,8 +17,8 @@ Each branch store different version of Phoebe:
 
 ## Author :person_with_blond_hair:
 - Name: Yevgeniy Kiprenko 
+- Email: zhenyakiprenko@gmail.com
 - [LinkedIn](https://www.linkedin.com/in/evgeniy-kiprenko/)
-- [Email](zhenyakiprenko@gmail.com)
 - [Telegram](https://t.me/Jus7XV)
 
 ## Date of finish :date:

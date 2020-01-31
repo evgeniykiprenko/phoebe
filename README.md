@@ -16,9 +16,10 @@ Each branch store different version of Phoebe:
 **This is the main README file, that contains the main information about Phoebe. To more detailed information about specific branch (version) check it README**
 
 ## Author :person_with_blond_hair:
-name: Yevgeniy Kiprenko 
-email: zhenyakiprenko@gmail.com
-telegram: https://t.me/Jus7XV
+- Name: Yevgeniy Kiprenko 
+- [LinkedIn](https://www.linkedin.com/in/evgeniy-kiprenko/)
+- [Email](zhenyakiprenko@gmail.com)
+- [Telegram](https://t.me/Jus7XV)
 
 ## Date of finish :date:
 27.12.19

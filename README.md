@@ -15,12 +15,11 @@ Each branch store different version of Phoebe:
 
 **This is the main README file, that contains the main information about Phoebe. To more detailed information about specific branch (version) check it README**
 
-## Author :panda_face:
+## Author 🦝
 
 - Name: Evgeniy Kiprenko
 - Email: zhenyakiprenko@gmail.com
-- [LinkedIn](https://www.linkedin.com/in/evgeniy-kiprenko/)
-- [Telegram](https://t.me/Jus7XV)
+- [LinkedIn](https://www.linkedin.com/in/kiprenko/)
 
 ## Date of finish :date:
 27.12.19
